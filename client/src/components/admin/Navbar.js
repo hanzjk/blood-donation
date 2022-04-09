@@ -9,17 +9,17 @@ export default class Navbar extends Component {
         };
     }
 
-    componentDidMount() {
-        const id = this.props.match.params.id;
-        axios.get(`http://localhost:8000/admin/dashboard/${id}`).then((res) => {
-            if (res.data.success) {
-                this.setState({
-                    admin: res.data.admin
-                });
-                console.log(this.state.admin);
-            }
-        })
-    }
+    // componentDidMount() {
+    //     const id = this.props.match.params.id;
+    //     axios.get(`http://localhost:8000/admin/dashboard/${id}`).then((res) => {
+    //         if (res.data.success) {
+    //             this.setState({
+    //                 admin: res.data.admin
+    //             });
+    //             console.log(this.state.admin);
+    //         }
+    //     })
+    // }
     
 
     render() {

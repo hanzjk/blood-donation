@@ -40,7 +40,7 @@ export default class App extends Component {
           <Route exact path="/patient/edit/:id" component={EditPatient} />
           <Route exact path="/patient/login" component={LoginPatient} />
           <Route exact path="/admins/save" component={SignUpAdmin}/>
-          <Route exact path="/admin/dashboard/:id" component={AdminNavbar}/>
+          {/* <Route exact path="/admin/dashboard/:id" component={AdminNavbar}/> */}
           <Route exact path="/admin/home/:id" component={AdminHome}/>
           <Route exact path="/admin/login" component={LoginAdmin}/>
           <Route exact path="/admin/donors" component={AdminGetDonors}/>

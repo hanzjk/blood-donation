@@ -118,12 +118,12 @@ router.post('/patient/login', (req, res) => {
     Patients.findOne({ name: req.body.userName }).then(user => {
         if (!user) {
             return res.status(200).json({
-                messageUser: "Username not found"
+                messageUser: "Entered user credentials are incorrect!"
             });
         }
         if (!user.validPassword(req.body.password)) {
             return res.status(200).json({
-                messagePassword: "Password entered was incorrect"
+                messagePassword: "Entered user credentials are incorrect!"
             });
         }
         else {

@@ -156,12 +156,12 @@ router.post('/donor/login', (req, res) => {
     Donor.findOne({ name: req.body.userName }).then(user => {
         if (!user) {
             return res.status(200).json({
-                message: "Username not found"
+                message: "Entered user credentials are incorrect!"
             });
         }
         if (!user.validPassword(req.body.password)) {
             return res.status(200).json({
-                message: "Password entered was incorrect"
+                message: "Entered user credentials are incorrect!"
             });
         }
         else {

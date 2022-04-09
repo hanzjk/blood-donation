@@ -168,7 +168,7 @@ router.get('/admin/dashboard/:id', (req, res) => {
 });
 
 //get specific admin header
-router.get('/admin/header/:id', (req, res) => {
+router.get('/admin/home/:id', (req, res) => {
     let postId = req.params.id;
     Admin.findById(postId).exec((err, admin) => {
         if (err) {
@@ -188,12 +188,12 @@ router.post('/admin/login', (req, res) => {
     Admin.findOne({ name: req.body.userName }).then(user => {
         if (!user) {
             return res.status(200).json({
-                messageUser: "Username not found"
+                messageUser: "Entered user credentials are incorrect!"
             });
         }
         if (!user.validPassword(req.body.password)) {
             return res.status(200).json({
-                messagePassword: "Password entered was incorrect"
+                messagePassword: "Entered user credentials are incorrect!"
             });
         }
         else {
