@@ -48,7 +48,7 @@ export default class GetDonors extends Component {
     toPages(pages) {
         const results = [];
 
-        for (let i = 1; i < pages; i++) {
+        for (let i = 1; i <= pages; i++) {
             results.push(i);
         }
 
@@ -123,6 +123,8 @@ export default class GetDonors extends Component {
         const pageItems = this.toPages(pages);
         const nextDisabled = currentPage === pageItems.length;
         const previosDisabled = currentPage === 1;
+
+        console.log(pageItems);
 
         return (
             <nav>
