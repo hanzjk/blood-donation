@@ -168,7 +168,7 @@ router.get('/admin/dashboard/:id', (req, res) => {
 });
 
 //get specific admin header
-router.get('/admin/header/:id', (req, res) => {
+router.get('/admin/home/:id', (req, res) => {
     let postId = req.params.id;
     Admin.findById(postId).exec((err, admin) => {
         if (err) {
