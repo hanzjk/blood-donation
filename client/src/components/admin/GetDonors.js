@@ -205,7 +205,6 @@ export default class GetDonors extends Component {
                         </div>
                     </div>
                     <DataTable
-                        title="Search donors with thier name or blood type"
                         responsive
                         subHeader
                         columns={this.columns}

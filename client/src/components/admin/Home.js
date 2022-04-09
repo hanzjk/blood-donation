@@ -12,7 +12,7 @@ export default class Home extends Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        axios.get(`http://localhost:8000/admin/dashboard/${id}`).then((res) => {
+        axios.get(`http://localhost:8000/admin/home/${id}`).then((res) => {
             if (res.data.success) {
                 this.setState({
                     admin: res.data.admin

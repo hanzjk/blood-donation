@@ -47,7 +47,7 @@ export default class Login extends Component {
                 localStorage.setItem("token",res.data.token)
                 console.log(res.data.token);
                 console.log("Password matched");
-                this.props.history.push(`/admin/dashboard/${res.data.message._id}`)
+                this.props.history.push(`/admin/home/${res.data.message._id}`)
             }
             else {
                 if (res.data.messageUser) {
