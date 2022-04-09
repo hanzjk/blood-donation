@@ -115,7 +115,7 @@ router.get('/hospital/:id',(req,res)=>{
 
 //login
 router.post('/donor/login', (req, res) => {
-    Hospital.findOne({ name: req.body.hospitalName }).then(user => {
+    Hospital.findOne({ email: req.body.hospitalName }).then(user => {
         if (!user) {
             return res.status(200).json({
                 messageUser: "Entered user credentials are incorrect!"

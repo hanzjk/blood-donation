@@ -70,8 +70,8 @@ export default class Login extends Component {
                     <h1 className="h3 mb-3 font-weight-normal">Hospital Login</h1>
                     <form className="needs-validation" noValidate>
                         <div className="form-group" style={{ marginBottom: "15px" }}>
-                            <label style={{ marginBottom: '5px' }}>Hospital Name</label>
-                            <input type="text" className="form-control" name="hospitalName" placeholder="Enter hospital name" value={this.state.hospitalName} onChange={this.handleInputChange}></input>
+                            <label style={{ marginBottom: '5px' }}>Email Address</label>
+                            <input type="text" className="form-control" name="hospitalName" placeholder="Enter email address" value={this.state.hospitalName} onChange={this.handleInputChange}></input>
                         </div>
 
                         <div className="form-group" style={{ marginBottom: "15px" }}>
