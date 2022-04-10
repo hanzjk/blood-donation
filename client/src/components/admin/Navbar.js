@@ -99,7 +99,7 @@ export default class Navbar extends Component {
                   aria-labelledby="navbarDropdownMenuLinkRec"
                 >
                   <li>
-                    <a className="dropdown-item" href="/admins/save">
+                    <a className="dropdown-item" href="/admin/patients">
                       Patients
                     </a>
                   </li>

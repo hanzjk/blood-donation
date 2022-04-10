@@ -18,6 +18,7 @@ import AdminHome from './components/admin/Home'
 import LoginAdmin from './components/admin/Login'
 import AdminGetDonors from './components/admin/GetDonors'
 import AdminGetNurses from './components/admin/GetNurses'
+import AdminGetPatients from './components/admin/GetPatients'
 import EditAdmin from './components/admin/Edit'
 import GetAdmins from './components/admin/Get'
 import AdminNavbar from './components/admin/Navbar'
@@ -71,6 +72,7 @@ export default class App extends Component {
         <Route exact path="/admin/login" component={LoginAdmin} />
         <Route exact path="/admin/donors" component={AdminGetDonors} />
         <Route exact path="/admin/nurses" component={AdminGetNurses} />
+        <Route exact path="/admin/patients" component={AdminGetPatients} />
         <Route exact path="/nurses/save" component={SignUpNurse} />
         <Route exact path="/admin/edit/:id" component={EditAdmin} />
         <Route exact path="/admins" component={GetAdmins} />

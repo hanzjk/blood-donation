@@ -6,14 +6,21 @@ export default class SignUp extends Component {
         super(props);
         this.state = {
             name: "",
-            gender:"",
-            age:"",
+            gender: "",
+            age: "",
             address: "",
             bloodType: "",
             contact: "",
             email: "",
             password: ""
         }
+    }
+
+    handleBloodChange = (e) => {
+
+        this.setState({
+            bloodType:e.target.value
+        })
     }
 
     handleInputChange = (e) => {
@@ -47,8 +54,8 @@ export default class SignUp extends Component {
             if (res.data.success) {
                 this.setState({
                     name: "",
-                    gender:"",
-                    age:"",
+                    gender: "",
+                    age: "",
                     address: "",
                     bloodType: "",
                     contact: "",
@@ -67,12 +74,12 @@ export default class SignUp extends Component {
                 <form className="needs-validation" noValidate>
                     <div className="form-group" style={{ marginBottom: "15px" }}>
                         <label style={{ marginBottom: '5px' }}>Name</label>
-                        <input type="text" className="form-control" name="name" placeholder="Enter name" value={this.state.name} onChange={this.handleInputChange}></input>
+                        <input required="true" type="text" className="form-control" name="name" placeholder="Enter name" value={this.state.name} onChange={this.handleInputChange}></input>
                     </div>
 
                     <div className="form-group" style={{ marginBottom: "15px" }}>
                         <label style={{ marginBottom: '5px' }}>Address</label>
-                        <input type="text" className="form-control" name="address" placeholder="Enter address" value={this.state.address} onChange={this.handleInputChange}></input>
+                        <input required="true" type="text" className="form-control" name="address" placeholder="Enter address" value={this.state.address} onChange={this.handleInputChange}></input>
                     </div>
 
                     <div className="row">
@@ -84,13 +91,12 @@ export default class SignUp extends Component {
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                {/* <input type="text" className="form-control" name="gender" placeholder="Enter blood type" value={this.state.gender} onChange={this.handleInputChange}></input> */}
                             </div>
                         </div>
                         <div className="col md-6">
                             <div className="form-group" style={{ marginBottom: "15px" }}>
                                 <label style={{ marginBottom: '5px' }}>Age</label>
-                                <input type="text" className="form-control" name="age" placeholder="Enter the age" value={this.state.age} onChange={this.handleInputChange}></input>
+                                <input required="true" type="text" className="form-control" name="age" placeholder="Enter the age" value={this.state.age} onChange={this.handleInputChange}></input>
                             </div>
                         </div>
                     </div>
@@ -99,13 +105,22 @@ export default class SignUp extends Component {
                         <div className="col md-6">
                             <div className="form-group" style={{ marginBottom: "15px" }}>
                                 <label style={{ marginBottom: '5px' }}>Blood Type</label>
-                                <input type="text" className="form-control" name="bloodType" placeholder="Enter blood type" value={this.state.bloodType} onChange={this.handleInputChange}></input>
+                                <select className="form-control" value={this.state.bloodType} onChange={this.handleBloodChange} name="bloodType">
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
                             </div>
                         </div>
                         <div className="col md-6">
                             <div className="form-group" style={{ marginBottom: "15px" }}>
                                 <label style={{ marginBottom: '5px' }}>Contact Number</label>
-                                <input type="text" className="form-control" name="contact" placeholder="Enter contact number" value={this.state.contact} onChange={this.handleInputChange}></input>
+                                <input required="true" type="text" className="form-control" name="contact" placeholder="Enter contact number" value={this.state.contact} onChange={this.handleInputChange}></input>
                             </div>
                         </div>
                     </div>
@@ -114,21 +129,22 @@ export default class SignUp extends Component {
                         <div className="col md-6">
                             <div className="form-group" style={{ marginBottom: "15px" }}>
                                 <label style={{ marginBottom: '5px' }}>Email Address</label>
-                                <input type="email" className="form-control" name="email" placeholder="Enter email address" value={this.state.email} onChange={this.handleInputChange}></input>
+                                <input required="true" type="email" className="form-control" name="email" placeholder="Enter email address" value={this.state.email} onChange={this.handleInputChange}></input>
                             </div>
                         </div>
                         <div className="col md-6">
                             <div className="form-group" style={{ marginBottom: "15px" }}>
                                 <label style={{ marginBottom: '5px' }}>Password</label>
-                                <input type="password" className="form-control" name="password" placeholder="Enter password" value={this.state.password} onChange={this.handleInputChange}></input>
+                                <input required="true" type="password" className="form-control" name="password" placeholder="Enter password" value={this.state.password} onChange={this.handleInputChange}></input>
                             </div>
                         </div>
                     </div>
 
-                    <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
-                        <i className="fa fa-check-square"></i>
+                    <div className="d-grid">
+                        <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
+                            <i className="fa fa-check-square"></i>
                     &nbsp; Create Account
-                    </button>
+                    </button></div>
                 </form>
             </div>
         )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Navbar from './Navbar';
-import { Alert } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ export default class SignUp extends Component {
             email: "",
             img: "",
             password: "",
-            show:false
+            show: false
         }
     }
 
@@ -55,11 +55,10 @@ export default class SignUp extends Component {
                     adminId: "",
                     email: "",
                     img: "",
-                    password: ""
+                    password: "",
+                    show:true
                 })
                 //this.props.setToken(res.sessionToken)
-                console.log(res)
-                console.log("res")
 
             }
         })
@@ -74,43 +73,43 @@ export default class SignUp extends Component {
                     <form className="needs-validation" encType="multipart/form-data">
                         <div className="form-group" style={{ marginBottom: "15px" }}>
                             <label style={{ marginBottom: '5px' }}>Name</label>
-                            <input type="text" className="form-control" name="name" placeholder="Enter name" value={this.state.name} onChange={this.handleInputChange}></input>
+                            <input required="true" type="text" className="form-control" name="name" placeholder="Enter name" value={this.state.name} onChange={this.handleInputChange}></input>
                         </div>
 
                         <div className="form-group" style={{ marginBottom: "15px" }}>
                             <label style={{ marginBottom: '5px' }}>Admin Id</label>
-                            <input type="text" className="form-control" name="adminId" placeholder="Enter the Admin Id" value={this.state.adminId} onChange={this.handleInputChange}></input>
+                            <input required="true" type="text" className="form-control" name="adminId" placeholder="Enter the Admin Id" value={this.state.adminId} onChange={this.handleInputChange}></input>
                         </div>
 
                         <div className="row">
                             <div className="col md-6">
                                 <div className="form-group" style={{ marginBottom: "15px" }}>
                                     <label style={{ marginBottom: '5px' }}>Email Address</label>
-                                    <input type="email" className="form-control" name="email" placeholder="Enter email address" value={this.state.email} onChange={this.handleInputChange}></input>
+                                    <input required="true" type="email" className="form-control" name="email" placeholder="Enter email address" value={this.state.email} onChange={this.handleInputChange}></input>
                                 </div>
                             </div>
 
                             <div className="col md-6">
                                 <div className="form-group" style={{ marginBottom: "15px" }}>
                                     <label style={{ marginBottom: '5px' }}>Profile Photo</label>
-                                    <input type="file" className="form-control" name="img" onChange={this.setFileName}></input>
+                                    <input required="true" type="file" className="form-control" name="img" onChange={this.setFileName}></input>
                                 </div>
                             </div>
                         </div>
                         <div className="form-group" style={{ marginBottom: "15px" }}>
                             <div className="form-group" style={{ marginBottom: "15px" }}>
                                 <label style={{ marginBottom: '5px' }}>Password</label>
-                                <input type="password" className="form-control" name="password" placeholder="Enter password" value={this.state.password} onChange={this.handleInputChange}></input>
+                                <input required="true" type="password" className="form-control" name="password" placeholder="Enter password" value={this.state.password} onChange={this.handleInputChange}></input>
                             </div>
                         </div>
-
-                        <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
-                            <i className="fa fa-check-square"></i>
-                    &nbsp; Create
+                        <div className="d-grid">
+                            <button className="btn btn-success btn-block" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>Create Account
                     </button>
+                        </div>
                     </form>
+                    <br></br>
                     <Alert show={this.state.show} variant="success" onClose={this.setShow} dismissible>
-                        <p  style={{ textAlign: "center" }}>Admin Added Successfully <i className="fa fa-check-square"></i></p>
+                        <p style={{ textAlign: "center" }}>Admin Added Successfully <i className="fa fa-check-square"></i></p>
                     </Alert>
                 </div>
             </div>
