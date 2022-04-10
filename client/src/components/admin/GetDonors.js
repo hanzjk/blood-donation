@@ -3,13 +3,18 @@ import React, { Component } from 'react'
 import DataTable from "react-data-table-component"
 import axios from 'axios'
 import Navbar from './Navbar';
+import { Button, Modal } from 'react-bootstrap';
 
 export default class GetDonors extends Component {
     constructor(props) {
         super(props);
         this.state = {
             donors: [],
-            id: ""
+            id: "",
+            show: false,
+            showDetails:false,
+            donId:"",
+            donor:{}
         }
     }
 
@@ -24,10 +29,30 @@ export default class GetDonors extends Component {
         console.log(this.state.id)
     }
 
+    handleClose = () => this.setState({
+        show: false,
+        showDetails:false
+    });
+    handleShowDelete = (id) => this.setState({
+        show: true,
+        donId:id
+    });
+
+    handleShowDonor = (id) => axios.get(`http://localhost:8000/donor/${id}`).then((res) => {
+        if (res.data.success) {
+            this.setState({
+                showDetails:true,
+                donor:res.data.donor
+            });
+
+            console.log(this.state.donor);
+        }
+    })
+
     onDelete = (id) => {
         axios.delete(`http://localhost:8000/donors/delete/${id}`).then(res => {
-            alert("Deleted Successfully");
             this.getDonors();
+            this.handleClose();
         })
     }
 
@@ -48,7 +73,7 @@ export default class GetDonors extends Component {
     toPages(pages) {
         const results = [];
 
-        for (let i = 1; i < pages; i++) {
+        for (let i = 1; i <= pages; i++) {
             results.push(i);
         }
 
@@ -90,13 +115,17 @@ export default class GetDonors extends Component {
             selector: (row) => row.contact
         },
         {
-            name: "Email Address",
+            name: "Email",
             selector: (row) => row.email,
             sortable: true
         },
         {
             name: "Delete",
-            selector: (row) => <a className="btn btn-sm btn-danger" href="#" onClick={() => this.onDelete(row._id)}>Delete <i className="fa fa-trash"></i></a>
+            selector: (row) =><Button variant="danger" size="sm" onClick={()=>this.handleShowDelete(row._id)}>Delete</Button>
+        },
+        {
+            name: "View",
+            selector: (row) =><Button variant="primary" size="sm" onClick={()=>this.handleShowDonor(row._id)}>View</Button>
         }
     ]
 
@@ -123,6 +152,7 @@ export default class GetDonors extends Component {
         const pageItems = this.toPages(pages);
         const nextDisabled = currentPage === pageItems.length;
         const previosDisabled = currentPage === 1;
+
 
         return (
             <nav>
@@ -173,7 +203,9 @@ export default class GetDonors extends Component {
 
     filterData(donors, searchKey) {
         const result = donors.filter((donor) =>
-            donor.name.toLowerCase().includes(searchKey) || donor.name.toUpperCase().includes(searchKey) || donor.bloodType.toLowerCase().includes(searchKey) || donor.bloodType.toUpperCase().includes(searchKey)
+            donor.name.toLowerCase().includes(searchKey) || donor.name.toUpperCase().includes(searchKey) || 
+            donor.bloodType.toLowerCase().includes(searchKey) || donor.bloodType.toUpperCase().includes(searchKey)
+            || donor.address.toLowerCase().includes(searchKey) || donor.address.toUpperCase().includes(searchKey)
         )
         this.setState({
             donors: result
@@ -217,6 +249,69 @@ export default class GetDonors extends Component {
                         defaultSortFieldID={1}
                     />
                 </div>
+                
+                <Modal show={this.state.show} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title> Delete Donor</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body style={{textAlign:"center"}}>Delete this donor?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="danger" onClick={() => this.onDelete(this.state.donId)}>
+                            Yes
+                        </Button>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            No
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={this.state.showDetails} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Donor Details</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="card" style={{ margin: "20px" , border:"none"}}>
+                                <div className="card-body">
+                                    <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.donor.name}</h5>
+                                    <br></br>
+                                    <div className="d-flex flex-column align-items-center text-center">
+                                        <img src={`../../uploads/donor/${this.state.donor.img}`} alt="photo" style={{ width: "25%", height: "25%", marginLeft: "auto", marginRight: "auto" }}></img>
+                                    </div>
+                                </div>
+                                <dl className="d-flex align-items-center">
+                                    <dl className="row">
+                                        <dt className="col-lg-5">Address</dt>
+                                        <dd className="col-lg-7">{this.state.donor.address}</dd>
+                                        <hr></hr>
+                                        <dt className="col-lg-5">Gender</dt>
+                                        <dd className="col-lg-7">{this.state.donor.gender}</dd>
+                                        <hr></hr>
+                                        <dt className="col-lg-5">NIC</dt>
+                                        <dd className="col-lg-7">{this.state.donor.nic}</dd>
+                                        <hr></hr>
+                                        <dt className="col-lg-5">Blood Group</dt>
+                                        <dd className="col-lg-7">{this.state.donor.bloodType}</dd>
+                                        <hr></hr>
+                                        <dt className="col-lg-5">Contact Number</dt>
+                                        <dd className="col-lg-7">{this.state.donor.contact}</dd>
+                                        <hr></hr>
+                                        <dt className="col-lg-5">Email</dt>
+                                        <dd className="col-lg-7">{this.state.donor.email}</dd>
+                                    </dl>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
             </div>
         )
     }

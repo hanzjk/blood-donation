@@ -10,6 +10,7 @@ const mediInfoPatientRoutes = require('./backend/routes/mediInfoPatient');
 const patientRoutes = require('./backend/routes/patient');
 const adminRoutes = require('./backend/routes/admin')
 const nurseRoutes = require('./backend/routes/nurse')
+const stockaRoutes = require('./backend/routes/bloodTypes')
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(mediInfoPatientRoutes);
 app.use(patientRoutes);
 app.use(adminRoutes);
 app.use(nurseRoutes);
+app.use(stockaRoutes);
 
 const PORT = 8000;
 const URL = process.env.DB_URL;

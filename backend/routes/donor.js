@@ -153,7 +153,7 @@ router.get('/donor/:id', (req, res) => {
 
 //login
 router.post('/donor/login', (req, res) => {
-    Donor.findOne({ name: req.body.userName }).then(user => {
+    Donor.findOne({ email: req.body.userName }).then(user => {
         if (!user) {
             return res.status(200).json({
                 message: "Entered user credentials are incorrect!"

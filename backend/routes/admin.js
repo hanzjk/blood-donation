@@ -185,7 +185,7 @@ router.get('/admin/home/:id', (req, res) => {
 
 //login
 router.post('/admin/login', (req, res) => {
-    Admin.findOne({ name: req.body.userName }).then(user => {
+    Admin.findOne({ email: req.body.userName }).then(user => {
         if (!user) {
             return res.status(200).json({
                 messageUser: "Entered user credentials are incorrect!"
