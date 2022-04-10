@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Navbar from './Navbar';
+import { Alert } from 'react-bootstrap';
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -10,8 +11,15 @@ export default class SignUp extends Component {
             adminId: "",
             email: "",
             img: "",
-            password: ""
+            password: "",
+            show:false
         }
+    }
+
+    setShow = () => {
+        this.setState({
+            show: false
+        });
     }
 
     handleInputChange = (e) => {
@@ -101,6 +109,9 @@ export default class SignUp extends Component {
                     &nbsp; Create
                     </button>
                     </form>
+                    <Alert show={this.state.show} variant="success" onClose={this.setShow} dismissible>
+                        <p  style={{ textAlign: "center" }}>Admin Added Successfully <i className="fa fa-check-square"></i></p>
+                    </Alert>
                 </div>
             </div>
         )

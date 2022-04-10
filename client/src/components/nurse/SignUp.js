@@ -155,9 +155,8 @@ export default class SignUp extends Component {
                     </button>
                     </form>
                     <br></br>
-                    <Alert variant="success" onClick={this.setShow} dismissible>
-                        <Alert.Heading>Nurse Added Successfully <i className="fa fa-check-square"></i>
-                        </Alert.Heading>
+                    <Alert show={this.state.show} variant="success" onClose={this.setShow} dismissible>
+                        <p  style={{ textAlign: "center" }}>Nurse Added Successfully <i className="fa fa-check-square"></i></p>
                     </Alert>
                 </div>
             </div>
