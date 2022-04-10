@@ -17,10 +17,13 @@ import SignUpAdmin from './components/admin/SignUp'
 import AdminHome from './components/admin/Home'
 import LoginAdmin from './components/admin/Login'
 import AdminGetDonors from './components/admin/GetDonors'
+import AdminGetNurses from './components/admin/GetNurses'
 import EditAdmin from './components/admin/Edit'
 import GetAdmins from './components/admin/Get'
 import AdminNavbar from './components/admin/Navbar'
 import Messenger from './components/messenger/Messenger'
+import SignUpNurse from './components/nurse/SignUp'
+
 export default class App extends Component {
 
   render() {
@@ -67,6 +70,8 @@ export default class App extends Component {
         <Route exact path="/admin/home/:id" component={AdminHome} />
         <Route exact path="/admin/login" component={LoginAdmin} />
         <Route exact path="/admin/donors" component={AdminGetDonors} />
+        <Route exact path="/admin/nurses" component={AdminGetNurses} />
+        <Route exact path="/nurses/save" component={SignUpNurse} />
         <Route exact path="/admin/edit/:id" component={EditAdmin} />
         <Route exact path="/admins" component={GetAdmins} />
         <Route exact path="/admin/messenger" component={Messenger} />

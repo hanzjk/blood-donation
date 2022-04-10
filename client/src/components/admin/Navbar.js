@@ -11,11 +11,11 @@ export default class Navbar extends Component {
   }
 
   handleLogout = (e) => {
-      localStorage.clear();
-      window.location.replace("http://localhost:3000/admin/login/");
+    localStorage.clear();
+    window.location.replace("http://localhost:3000/admin/login/");
 
   };
-    
+
   // componentDidMount() {
   //     const id = this.props.match.params.id;
   //     axios.get(`http://localhost:8000/admin/dashboard/${id}`).then((res) => {
@@ -74,7 +74,7 @@ export default class Navbar extends Component {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/nurses">
+                <a className="nav-link" href="/admin/nurses">
                   Nurses
                 </a>
               </li>
@@ -96,7 +96,7 @@ export default class Navbar extends Component {
                 </a>
                 <ul
                   className="dropdown-menu"
-                  aria-labelledby="navbarDropdownMenuLink"
+                  aria-labelledby="navbarDropdownMenuLinkRec"
                 >
                   <li>
                     <a className="dropdown-item" href="/admins/save">
@@ -110,14 +110,39 @@ export default class Navbar extends Component {
                   </li>
                 </ul>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/admins/save">
-                  Add Admin
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMenuLinkRec"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Add
                 </a>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <li className="nav-item">
+                    <a className="dropdown-item" href="/admins/save">
+                      Add Admin
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/nurses/save">
+                      Add Nurse
+                    </a>
+                  </li>
+                </ul>
               </li>
 
+
               <li className="nav-item">
-                <button onClick={this.handleLogout}>logout</button>
+                <a className="nav-link btn" onClick={this.handleLogout}>
+                  Logout
+                </a>
               </li>
             </ul>
           </div>
