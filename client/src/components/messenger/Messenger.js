@@ -9,14 +9,14 @@ import { io } from "socket.io-client";
 import jwt_decode from "jwt-decode";
 
 export default function Messenger() {
-  var userID = null;
+  const userID = jwt_decode(localStorage.getItem("token")).userId;
   useEffect(() => {
      const token = localStorage.getItem("token");
 
      if (!token) {
        window.location.replace("/admin/login");
      }
-     userID = jwt_decode(localStorage.getItem("token")).userId;
+    
   })
   
 
