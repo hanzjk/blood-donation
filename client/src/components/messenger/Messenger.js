@@ -6,9 +6,20 @@ import Message from "../message/Message";
 import Navbar from "../admin/Navbar";
 import axios from "axios";
 import { io } from "socket.io-client";
+import jwt_decode from "jwt-decode";
 
 export default function Messenger() {
-  const userID = "62497055448fe0c56014ec0b";
+  var userID = null;
+  useEffect(() => {
+     const token = localStorage.getItem("token");
+
+     if (!token) {
+       window.location.replace("/admin/login");
+     }
+     userID = jwt_decode(localStorage.getItem("token")).userId;
+  })
+  
+
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -18,7 +29,9 @@ export default function Messenger() {
   const socket = useRef();
   const scrollRef = useRef();
 
-   useEffect(() => {
+  useEffect(() => {
+    
+    
      socket.current = io("ws://localhost:8900");
      socket.current.on("getMessage", (data) => {
        setArrivalMessage({

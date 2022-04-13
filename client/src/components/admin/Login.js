@@ -40,11 +40,10 @@ export default class Login extends Component {
           password: "",
           error: "",
         });
-        localStorage.setItem("user", res.data.message._id);
+        localStorage.setItem("token", res.data.token);
 
-        console.log(res.data.token);
         console.log("Password matched");
-        this.props.history.push(`/admin/home/${res.data.message._id}`);
+        this.props.history.push(`/admin/home`);
       } else {
         if (res.data.messageUser) {
           this.setState({

@@ -29,38 +29,29 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
-          <Route exact path="/donors" component={GetDonors} />
-          <Route exact path="/donors/add" component={SignUpDonor} />
-          <Route exact path="/donor/edit/:id" component={EditDonor} />
-          <Route exact path="/donor/login" component={LoginDonor}/>
-          <Route exact path="/donor/password/update/:id" component={UpdatePwdDonor} />
-          <Route exact path="/hospitals" component={GetHospitals} />
-          <Route exact path="/hospitals/add" component={SignUpHospital} />
-          <Route exact path="/hospital/edit/:id" component={EditHospital} />
-          <Route exact path="/hospital/login" component={LoginHospital} />
-          <Route exact path="/patients" component={GetPatients} />
-          <Route exact path="/patients/add" component={SignUpPatient} />
-          <Route exact path="/patient/edit/:id" component={EditPatient} />
-          <Route exact path="/patient/login" component={LoginPatient} />
-          <Route exact path="/admins/save" component={SignUpAdmin}/>
-          <Route exact path="/admin/home/:id" component={AdminHome}/>
-          <Route exact path="/admin/login" component={LoginAdmin}/>
-          <Route exact path="/admin/donors" component={AdminGetDonors}/>
-          <Route exact path="/admin/edit/:id" component={EditAdmin}/>
-          <Route exact path="/admins" component={GetAdmins} />
-        <Route exact path="/donors" component={GetDonors} />
-        <Route exact path="/donors/add" component={SignUpDonor} />
-        <Route exact path="/donor/edit/:id" component={EditDonor} />
-        <Route exact path="/donor/login" component={LoginDonor} />
-        <Route
-          exact
-          path="/donor/password/update/:id"
-          component={UpdatePwdDonor}
-        />
+        <Route exact path="/admins/save" component={SignUpAdmin} />
+        <Route exact path="/admin/home" component={AdminHome} />
+        <Route exact path="/admin/login" component={LoginAdmin} />
+        <Route exact path="/admin/donors" component={AdminGetDonors} />
+        <Route exact path="/admin/edit/:id" component={EditAdmin} />
+        <Route exact path="/admins" component={GetAdmins} />
         <Route exact path="/admin/nurses" component={AdminGetNurses} />
         <Route exact path="/admin/patients" component={AdminGetPatients} />
         <Route exact path="/nurses/save" component={SignUpNurse} />
         <Route exact path="/admin/messenger" component={Messenger} />
+        <Route exact path="/donors" component={GetDonors} />
+        <Route exact path="/donors/add" component={SignUpDonor} />
+        <Route exact path="/donor/edit/:id" component={EditDonor} />
+        <Route exact path="/donor/login" component={LoginDonor} />
+        <Route exact path="/donor/password/update/:id" component={UpdatePwdDonor} />
+        <Route exact path="/hospitals" component={GetHospitals} />
+        <Route exact path="/hospitals/add" component={SignUpHospital} />
+        <Route exact path="/hospital/edit/:id" component={EditHospital} />
+        <Route exact path="/hospital/login" component={LoginHospital} />
+        <Route exact path="/patients" component={GetPatients} />
+        <Route exact path="/patients/add" component={SignUpPatient} />
+        <Route exact path="/patient/edit/:id" component={EditPatient} />
+        <Route exact path="/patient/login" component={LoginPatient} />
       </BrowserRouter>
     );
   }
