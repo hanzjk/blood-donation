@@ -12,7 +12,7 @@ export default class Navbar extends Component {
 
   handleLogout = (e) => {
     localStorage.clear();
-    window.location.replace("http://localhost:3000/admin/login/");
+    window.location.replace("/admin/login/");
 
   };
 
@@ -52,7 +52,7 @@ export default class Navbar extends Component {
                 <a
                   className="nav-link"
                   aria-current="page"
-                  href={`/admin/home/${this.state.admin._id}`}
+                  href={`/admin/home`}
                 >
                   Home
                 </a>
