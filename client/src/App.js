@@ -21,7 +21,6 @@ import AdminGetNurses from './components/admin/GetNurses'
 import AdminGetPatients from './components/admin/GetPatients'
 import EditAdmin from './components/admin/Edit'
 import GetAdmins from './components/admin/Get'
-import AdminNavbar from './components/admin/Navbar'
 import Messenger from './components/messenger/Messenger'
 import SignUpNurse from './components/nurse/SignUp'
 
@@ -44,7 +43,6 @@ export default class App extends Component {
           <Route exact path="/patient/edit/:id" component={EditPatient} />
           <Route exact path="/patient/login" component={LoginPatient} />
           <Route exact path="/admins/save" component={SignUpAdmin}/>
-          {/* <Route exact path="/admin/dashboard/:id" component={AdminNavbar}/> */}
           <Route exact path="/admin/home/:id" component={AdminHome}/>
           <Route exact path="/admin/login" component={LoginAdmin}/>
           <Route exact path="/admin/donors" component={AdminGetDonors}/>
@@ -59,23 +57,9 @@ export default class App extends Component {
           path="/donor/password/update/:id"
           component={UpdatePwdDonor}
         />
-        <Route exact path="/hospitals" component={GetHospitals} />
-        <Route exact path="/hospitals/add" component={SignUpHospital} />
-        <Route exact path="/hospital/edit/:id" component={EditHospital} />
-        <Route exact path="/hospital/login" component={LoginHospital} />
-        <Route exact path="/patients" component={GetPatients} />
-        <Route exact path="/patients/add" component={SignUpPatient} />
-        <Route exact path="/patient/edit/:id" component={EditPatient} />
-        <Route exact path="/patient/login" component={LoginPatient} />
-        <Route exact path="/admins/save" component={SignUpAdmin} />
-        <Route exact path="/admin/home/:id" component={AdminHome} />
-        <Route exact path="/admin/login" component={LoginAdmin} />
-        <Route exact path="/admin/donors" component={AdminGetDonors} />
         <Route exact path="/admin/nurses" component={AdminGetNurses} />
         <Route exact path="/admin/patients" component={AdminGetPatients} />
         <Route exact path="/nurses/save" component={SignUpNurse} />
-        <Route exact path="/admin/edit/:id" component={EditAdmin} />
-        <Route exact path="/admins" component={GetAdmins} />
         <Route exact path="/admin/messenger" component={Messenger} />
       </BrowserRouter>
     );
