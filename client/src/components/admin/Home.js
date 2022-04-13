@@ -16,7 +16,17 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        const id = this.props.match.params.id;
+
+        //if user is not logged in redirect to login page
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            window.location.replace('/admin/login');
+        }
+        /////////////////////////////////////////////////
+        //get userID from JWT Token
+        const id = jwt_decode(localStorage.getItem("token")).userId;
+        
         axios.get(`http://localhost:8000/admin/home/${id}`).then((res) => {
             if (res.data.success) {
                 this.setState({

@@ -46,7 +46,7 @@ export default class Login extends Component {
 
         
         console.log("Password matched");
-        this.props.history.push(`/admin/home/${res.data.message._id}`);
+        this.props.history.push(`/admin/home`);
       } else {
         if (res.data.messageUser) {
           this.setState({

@@ -63,7 +63,7 @@ export default class Navbar extends Component {
                 <a
                   className="nav-link"
                   aria-current="page"
-                  href={`/admin/home/${this.state.admin._id}`}
+                  href={`/admin/home`}
                 >
                   Home
                 </a>
