@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from './Navbar'
 import { Pie, Doughnut, Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto'
+import jwt_decode from "jwt-decode";
 
 
 export default class Home extends Component {
@@ -22,7 +23,7 @@ export default class Home extends Component {
                     admin: res.data.admin
                 });
 
-                console.log(this.state.admin);
+                //console.log(this.state.admin);
 
                 axios.get(`http://localhost:8000/bloodTypes/625180fb86e97f491d23ff7f`).then((res) => {
                     if (res.data.success) {
