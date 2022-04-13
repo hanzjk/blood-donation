@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from './Navbar'
 import { Pie, Doughnut, Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto'
+import jwt_decode from "jwt-decode";
 
 
 export default class Home extends Component {
@@ -15,14 +16,24 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        const id = this.props.match.params.id;
+
+        //if user is not logged in redirect to login page
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            window.location.replace('/admin/login');
+        }
+        /////////////////////////////////////////////////
+        //get userID from JWT Token
+        const id = jwt_decode(localStorage.getItem("token")).userId;
+        
         axios.get(`http://localhost:8000/admin/home/${id}`).then((res) => {
             if (res.data.success) {
                 this.setState({
                     admin: res.data.admin
                 });
 
-                console.log(this.state.admin);
+                //console.log(this.state.admin);
 
                 axios.get(`http://localhost:8000/bloodTypes/625180fb86e97f491d23ff7f`).then((res) => {
                     if (res.data.success) {
