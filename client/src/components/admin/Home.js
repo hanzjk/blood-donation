@@ -12,7 +12,10 @@ export default class Home extends Component {
         this.state = {
             admin: {},
             stock: {},
-            show:false
+            show: false,
+            greet: "",
+            time: "",
+            date: ""
         };
     }
 
@@ -25,6 +28,9 @@ export default class Home extends Component {
     });
 
     componentDidMount() {
+
+        this.display();
+        this.timer();
         //if user is not logged in redirect to login page
         const token = localStorage.getItem("token");
 
@@ -54,12 +60,58 @@ export default class Home extends Component {
                     });
             }
         });
+
     }
 
     onDelete = (id) => {
         axios.delete(`http://localhost:8000/admins/delete/${id}`).then(res => {
             this.handleClose();
         })
+    }
+
+    display = () => {
+        var day = new Date();
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        this.setState({
+            date: day.toLocaleDateString("en-US", options)
+        })
+        var hr = day.getHours();
+        if (hr >= 0 && hr < 12) {
+            this.setState({
+                greet: "Good Morning"
+            })
+        } else if (hr >= 12 && hr <= 17) {
+            this.setState({
+                greet: "Good Afternoon"
+            })
+        } else {
+            this.setState({
+                greet: "Good Evening"
+            })
+        }
+    }
+
+    timer = () => {
+        var currentTime = new Date()
+        var hours = currentTime.getHours()
+        var minutes = currentTime.getMinutes()
+        var sec = currentTime.getSeconds()
+        if (minutes < 10) {
+            minutes = "0" + minutes
+        }
+        if (sec < 10) {
+            sec = "0" + sec
+        }
+        var t_str = hours + ":" + minutes + ":" + sec + " ";
+        if (hours > 11) {
+            t_str += "PM";
+        } else {
+            t_str += "AM";
+        }
+        this.setState({
+            time: t_str
+        })
+        setTimeout(this.timer, 1000);
     }
 
     render() {
@@ -119,6 +171,22 @@ export default class Home extends Component {
             <div>
                 <Header />
                 <div className="container">
+                    <div className="row">
+                        <div className="card" style={{ margin: "20px" }}>
+                            <div className="card-body">
+                                <span style={{ color: "blue" }}>
+                                    <h3>{this.state.greet} Dr.{this.state.admin.name}!</h3>
+                                    <div style={{ float: "right" }}>
+                                        <h3>{this.state.date}</h3>
+                                        <h3>{this.state.time}</h3>
+                                    </div>
+                                </span>
+                                <p>Welcome to the Blood Donation Management Information System
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <div className="row">
                         <div className="col-lg-7">
                             <div className="card" style={{ margin: "20px" }}>
