@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 
 import Conversation from "../conversations/Conversation";
 import Message from "../message/Message";
-import Navbar from "../admin/Navbar";
+import Header from "../admin/Header";
 import axios from "axios";
 import { io } from "socket.io-client";
 import jwt_decode from "jwt-decode";
@@ -122,7 +122,7 @@ export default function Messenger() {
   
   return (
     <>
-      <Navbar />
+      <Header />
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatMenuWrapper">

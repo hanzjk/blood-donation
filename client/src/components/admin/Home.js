@@ -1,53 +1,66 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import Navbar from './Navbar'
+import Header from './Header'
 import { Pie, Doughnut, Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto'
 import jwt_decode from "jwt-decode";
-
+import { Button, Modal } from 'react-bootstrap';
 
 export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             admin: {},
-            stock: {}
+            stock: {},
+            show:false
         };
     }
 
+    handleClose = () => this.setState({
+        show: false
+    });
+
+    handleShowDelete = () => this.setState({
+        show: true
+    });
+
     componentDidMount() {
-      //if user is not logged in redirect to login page
-      const token = localStorage.getItem("token");
+        //if user is not logged in redirect to login page
+        const token = localStorage.getItem("token");
 
-      if (!token) {
-        window.location.replace("/admin/login");
-      }
-      /////////////////////////////////////////////////
-      //get userID from JWT Token
-        const id = jwt_decode(localStorage.getItem("token")).userId;
-        
-      axios.get(`http://localhost:8000/admin/home/${id}`).then((res) => {
-        if (res.data.success) {
-          this.setState({
-            admin: res.data.admin,
-          });
-
-          console.log(this.state.admin);
-
-          axios
-            .get(`http://localhost:8000/bloodTypes/625180fb86e97f491d23ff7f`)
-            .then((res) => {
-              if (res.data.success) {
-                this.setState({
-                  stock: res.data.stock,
-                });
-              }
-            });
+        if (!token) {
+            window.location.replace("/admin/login");
         }
-      });
+        /////////////////////////////////////////////////
+        //get userID from JWT Token
+        const id = jwt_decode(localStorage.getItem("token")).userId;
+
+        axios.get(`http://localhost:8000/admin/home/${id}`).then((res) => {
+            if (res.data.success) {
+                this.setState({
+                    admin: res.data.admin,
+                });
+
+                console.log(this.state.admin);
+
+                axios
+                    .get(`http://localhost:8000/bloodTypes/625180fb86e97f491d23ff7f`)
+                    .then((res) => {
+                        if (res.data.success) {
+                            this.setState({
+                                stock: res.data.stock,
+                            });
+                        }
+                    });
+            }
+        });
     }
 
-
+    onDelete = (id) => {
+        axios.delete(`http://localhost:8000/admins/delete/${id}`).then(res => {
+            this.handleClose();
+        })
+    }
 
     render() {
         const barData = {
@@ -104,10 +117,10 @@ export default class Home extends Component {
         }
         return (
             <div>
-                <Navbar />
+                <Header />
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-6">
+                        <div className="col-lg-7">
                             <div className="card" style={{ margin: "20px" }}>
                                 <div className="card-body">
                                     <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.admin.name}</h5>
@@ -115,13 +128,29 @@ export default class Home extends Component {
                                     <div className="d-flex flex-column align-items-center text-center">
                                         <img src={`../../uploads/admin/${this.state.admin.img}`} alt="photo" style={{ width: "15%", height: "15%", marginLeft: "auto", marginRight: "auto" }}></img>
 
-                                        <div className="mt-6">
+                                        <div className="mt-12">
                                             <a className="btn btn-success " href={`/admin/edit/${this.state.admin._id}`}>
                                                 <i className="fas fa-edit"></i>&nbsp;Edit Profile</a>&nbsp;
                                             <a className="btn btn-primary " href={`/admin/password/update/${this.state.admin._id}`}>
                                                 <i className="fas fa-camera"></i>&nbsp;Change Profile Photo</a>&nbsp;
                                             <a className="btn btn-warning " href={`/admin/password/update/${this.state.admin._id}`}>
                                                 <i className="fas fa-unlock"></i>&nbsp;Change Password</a>&nbsp;
+                                            <Button variant="danger" onClick={this.handleShowDelete}>Delete Account <i className="fas fa-trash"></i></Button>
+                                            <Modal show={this.state.show} onHide={this.handleClose}>
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title> Delete Admin Account</Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body style={{ textAlign: "center" }}>Delete Account?</Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button variant="danger" onClick={() => this.onDelete(this.state.admin._id)}>
+                                                        Yes
+                                                    </Button>
+                                                    <Button variant="secondary" onClick={this.handleClose}>
+                                                        No
+                                                    </Button>
+                                                </Modal.Footer>
+                                            </Modal>
+
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +166,7 @@ export default class Home extends Component {
                             </div>
                         </div>
 
-                        <div className="col-lg-6">
+                        <div className="col-lg-5">
                             <div className="card" style={{ margin: "20px" }}>
                                 <div className="card-body">
                                     <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>Chat</h5>

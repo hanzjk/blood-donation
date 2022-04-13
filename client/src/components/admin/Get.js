@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import DataTable from "react-data-table-component"
-import Navbar from './Navbar';
+import Header from './Header';
 import { Button, Modal } from 'react-bootstrap';
 
 
@@ -183,7 +183,7 @@ export default class Get extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                <Header />
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-9 mt-2 mb-2">

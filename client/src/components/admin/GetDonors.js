@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import DataTable from "react-data-table-component"
 import axios from 'axios'
-import Navbar from './Navbar';
+import Header from './Header';
 import { Button, Modal } from 'react-bootstrap';
 
 export default class GetDonors extends Component {
@@ -229,7 +229,7 @@ export default class GetDonors extends Component {
     render() {
         return (
             <div>
-                <Navbar id={this.state.id} />
+                <Header />
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-9 mt-2 mb-2">

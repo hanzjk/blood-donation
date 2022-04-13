@@ -23,6 +23,7 @@ import EditAdmin from './components/admin/Edit'
 import GetAdmins from './components/admin/Get'
 import Messenger from './components/messenger/Messenger'
 import SignUpNurse from './components/nurse/SignUp'
+import HeaderNurse from './components/nurse/Header'
 
 export default class App extends Component {
 
@@ -48,6 +49,7 @@ export default class App extends Component {
         <Route exact path="/hospitals/add" component={SignUpHospital} />
         <Route exact path="/hospital/edit/:id" component={EditHospital} />
         <Route exact path="/hospital/login" component={LoginHospital} />
+        <Route exact path="/nurse/home" component={HeaderNurse} />
         <Route exact path="/patients" component={GetPatients} />
         <Route exact path="/patients/add" component={SignUpPatient} />
         <Route exact path="/patient/edit/:id" component={EditPatient} />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Navbar from './Navbar';
+import Header from './Header';
 
 export default class Edit extends Component {
     constructor(props) {
@@ -68,7 +68,7 @@ export default class Edit extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                <Header />
                 <div className="container">
                     <h1 className="h3 mb-3 font-weight-normal">Edit Admin</h1>
                     <form className="needs-validation" noValidate>

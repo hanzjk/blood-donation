@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import Navbar from './Navbar';
+import Header from './Header';
 import { Alert, Button } from 'react-bootstrap';
 
 export default class SignUp extends Component {
@@ -67,7 +67,7 @@ export default class SignUp extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                <Header />
                 <div className="container">
                     <h1 className="h3 mb-3 font-weight-normal">Add New Admin</h1>
                     <form className="needs-validation" encType="multipart/form-data">
