@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Header from './Header';
+
 
 export default class UpdatePassword extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            password:"",
-            rePassword:""
+        this.state = {
+            password: "",
+            rePassword: ""
         }
     }
 
@@ -24,7 +26,7 @@ export default class UpdatePassword extends Component {
 
         const id = this.props.match.params.id;
 
-        const { password, rePassword} = this.state;
+        const { password, rePassword } = this.state;
 
         const data = {
             password: password,
@@ -48,24 +50,31 @@ export default class UpdatePassword extends Component {
 
     render() {
         return (
-            <div className="col-md-8 mt-4 mx-auto">
-                <h1 className="h3 mb-3 font-weight-normal">Change Password</h1>
-                <form className="needs-validation" noValidate>
-                    <div className="form-group" style={{ marginBottom: "15px" }}>
-                        <label style={{ marginBottom: '5px' }}>Password</label>
-                        <input type="password" className="form-control" name="password" placeholder="Enter index no" value={this.state.password} onChange={this.handleInputChange}></input>
-                    </div>
+            <div>
+                <Header />
+                <div className="container">
+                    <div className="col-md-8 mt-4 mx-auto">
+                        <h1 className="h3 mb-3 font-weight-normal">Change Password</h1>
+                        <form className="needs-validation" noValidate>
+                            <div className="form-group" style={{ marginBottom: "15px" }}>
+                                <label style={{ marginBottom: '5px' }}>Password</label>
+                                <input type="password" className="form-control" name="password" placeholder="Enter index no" value={this.state.password} onChange={this.handleInputChange}></input>
+                            </div>
 
-                    <div className="form-group" style={{ marginBottom: "15px" }}>
-                        <label style={{ marginBottom: '5px' }}>Reenter Password</label>
-                        <input type="password" className="form-control" name="rePassword" placeholder="Enter rePassword" value={this.state.rePassword} onChange={this.handleInputChange}></input>
-                    </div>
+                            <div className="form-group" style={{ marginBottom: "15px" }}>
+                                <label style={{ marginBottom: '5px' }}>Reenter Password</label>
+                                <input type="password" className="form-control" name="rePassword" placeholder="Enter rePassword" value={this.state.rePassword} onChange={this.handleInputChange}></input>
+                            </div>
 
-                    <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
-                        <i className="fa fa-check-square"></i>
-                        &nbsp; Update
+                            <div className="d-grid">
+                                <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
+                                    <i className="fa fa-check-square"></i>
+                        &nbsp; Update Password
                         </button>
-                </form>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         )
     }

@@ -191,7 +191,7 @@ export default class Get extends Component {
                         </div>
                     </div>
                     <DataTable
-                        title="Search admins with thier name or blood type"
+                        title="Search admins with thier name"
                         responsive
                         subHeader
                         columns={this.columns}
@@ -205,8 +205,8 @@ export default class Get extends Component {
                     />
                 </div>
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Donor Details</Modal.Title>
+                    <Modal.Header closeButton style={{backgroundColor:"#5D8AA8",color:"white"}}>
+                        <Modal.Title>Admin Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row">

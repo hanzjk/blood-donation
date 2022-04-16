@@ -198,11 +198,11 @@ export default class Home extends Component {
 
                                         <div className="mt-12">
                                             <a className="btn btn-success " href={`/admin/edit/${this.state.admin._id}`}>
-                                                <i className="fas fa-edit"></i>&nbsp;Edit Profile</a>&nbsp;
+                                                Edit Profile <i className="fas fa-edit"></i></a>&nbsp;
                                             <a className="btn btn-primary " href={`/admin/password/update/${this.state.admin._id}`}>
-                                                <i className="fas fa-camera"></i>&nbsp;Change Profile Photo</a>&nbsp;
+                                                Change Profile Photo <i className="fas fa-camera"></i></a>&nbsp;
                                             <a className="btn btn-warning " href={`/admin/password/update/${this.state.admin._id}`}>
-                                                <i className="fas fa-unlock"></i>&nbsp;Change Password</a>&nbsp;
+                                                Change Password <i className="fas fa-unlock"></i></a>&nbsp;
                                             <Button variant="danger" onClick={this.handleShowDelete}>Delete Account <i className="fas fa-trash"></i></Button>
                                             <Modal show={this.state.show} onHide={this.handleClose}>
                                                 <Modal.Header closeButton>

@@ -25,6 +25,7 @@ import GetAdmins from './components/admin/Get'
 import Messenger from './components/messenger/Messenger'
 import SignUpNurse from './components/nurse/SignUp'
 import HeaderNurse from './components/nurse/Header'
+import UpdatePwdAdmin from "./components/admin/UpdatePassword"
 
 export default class App extends Component {
 
@@ -36,6 +37,7 @@ export default class App extends Component {
         <Route exact path="/admin/login" component={LoginAdmin} />
         <Route exact path="/admin/donors" component={AdminGetDonors} />
         <Route exact path="/admin/edit/:id" component={EditAdmin} />
+        <Route exact path="/admin/password/update/:id" component={UpdatePwdAdmin} />
         <Route exact path="/admins" component={GetAdmins} />
         <Route exact path="/admin/nurses" component={AdminGetNurses} />
         <Route exact path="/admin/patients" component={AdminGetPatients} />

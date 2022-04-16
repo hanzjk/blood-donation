@@ -244,7 +244,7 @@ export default class GetPatients extends Component {
                 </div>
                 
                 <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton style={{backgroundColor:"#C41E3A",color:"white"}}>
                         <Modal.Title> Delete Patient</Modal.Title>
                     </Modal.Header>
                     <Modal.Body style={{textAlign:"center"}}>Delete this patient?</Modal.Body>
@@ -259,7 +259,7 @@ export default class GetPatients extends Component {
                 </Modal>
 
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton style={{backgroundColor:"#5D8AA8",color:"white"}}>
                         <Modal.Title>Patient Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
