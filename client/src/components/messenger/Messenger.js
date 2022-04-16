@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 
 import Conversation from "../conversations/Conversation";
 import Message from "../message/Message";
-import Header from "../admin/Header";
+import Header from "../admin/NavBar";
 import axios from "axios";
 import { io } from "socket.io-client";
 import jwt_decode from "jwt-decode";

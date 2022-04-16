@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import DataTable from "react-data-table-component"
-import Header from './Header';
+import Header from './NavBar';
 import { Button, Modal } from 'react-bootstrap';
 
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import DataTable from "react-data-table-component"
 import axios from 'axios'
-import Header from './Header';
+import Header from './NavBar';
 import { Button, Modal } from 'react-bootstrap';
 
 export default class GetNurses extends Component {

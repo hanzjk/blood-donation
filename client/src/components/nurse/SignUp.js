@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import Header from '../admin/Header';
+import Header from '../admin/NavBar';
 import { Alert } from 'react-bootstrap';
 
 

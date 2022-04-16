@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Header from './Header';
+import Header from './NavBar';
 
 
 export default class UpdatePassword extends Component {

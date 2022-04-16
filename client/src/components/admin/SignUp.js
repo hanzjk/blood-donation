@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import Header from './Header';
+import Header from './NavBar';
 import { Alert, Button } from 'react-bootstrap';
 
 export default class SignUp extends Component {
