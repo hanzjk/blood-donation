@@ -8,7 +8,8 @@ export default class Edit extends Component {
         this.state = {
             name: "",
             adminId: "",
-            email: ""
+            email: "",
+            error:""
         }
     }
 
@@ -24,6 +25,11 @@ export default class Edit extends Component {
                 });
 
                 console.log(this.state.admin);
+            }
+            else{
+                this.setState({
+                    error: "Something went wrong. Please try again later."
+                });
             }
         })
     }
@@ -57,9 +63,16 @@ export default class Edit extends Component {
                 this.setState({
                     name: "",
                     adminId: "",
-                    email: ""
+                    email: "",
+                    error:""
                 })
-                window.location.replace("/admin/dashboard");
+                window.location.replace("http://localhost:3000/admin/home");
+            }
+
+            else if(res.data.error){
+                this.setState({
+                    error:"Something went wrong. Please try agin later."
+                })
             }
         })
     }
@@ -88,6 +101,8 @@ export default class Edit extends Component {
                                     <label style={{ marginBottom: '5px' }}>Email Address</label>
                                     <input type="email" className="form-control" name="email" placeholder="Enter email address" value={this.state.email} onChange={this.handleInputChange}></input>
                                 </div>
+
+                                {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
 
                                 <div className="d-grid">
                                     <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>

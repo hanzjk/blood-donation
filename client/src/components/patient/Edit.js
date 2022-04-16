@@ -6,13 +6,14 @@ export default class Edit extends Component {
         super(props);
         this.state = {
             name: "",
-            gender:"",
-            age:"",
+            gender: "",
+            age: "",
             address: "",
             bloodType: "",
             contact: "",
             email: "",
-            password: ""
+            password: "",
+            err: ""
         }
     }
 
@@ -76,9 +77,16 @@ export default class Edit extends Component {
                     bloodType: "",
                     contact: "",
                     email: "",
-                    password: ""
+                    password: "",
+                    err: ""
                 })
-                window.location.replace("/");
+                window.location.replace("http://localhost:3000/patient/home");
+            }
+
+            else if (res.data.error) {
+                this.setState({
+                    error: "Something went wrong. Please try agin later."
+                })
             }
         })
     }
@@ -108,7 +116,6 @@ export default class Edit extends Component {
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                {/* <input type="text" className="form-control" name="gender" placeholder="Enter blood type" value={this.state.gender} onChange={this.handleInputChange}></input> */}
                             </div>
                         </div>
                         <div className="col md-6">
@@ -148,6 +155,7 @@ export default class Edit extends Component {
                             </div>
                         </div>
                     </div>
+                    {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
 
                     <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
                         <i className="fa fa-check-square"></i>

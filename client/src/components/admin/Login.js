@@ -33,7 +33,6 @@ export default class Login extends Component {
 
     console.log(data);
     axios.post("http://localhost:8000/admin/login", data).then((res) => {
-      console.log("lk");
       if (res.data.success) {
         this.setState({
           userName: "",

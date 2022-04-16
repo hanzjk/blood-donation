@@ -8,7 +8,8 @@ export default class UpdatePassword extends Component {
         super(props);
         this.state = {
             password: "",
-            rePassword: ""
+            rePassword: "",
+            err: ""
         }
     }
 
@@ -34,17 +35,24 @@ export default class UpdatePassword extends Component {
         }
 
         console.log(data);
+        if (password != rePassword) {
+            this.setState({
+                err: "Entered passwords are not matched!"
+            })
+        }
 
-        axios.put(`http://localhost:8000/admin/password/update/${id}`, data).then((res) => {
-            if (res.data.success) {
+        else {
+            axios.put(`http://localhost:8000/admin/password/update/${id}`, data).then((res) => {
+                if (res.data.success) {
 
-                this.setState({
-                    password: "",
-                    rePassword: ""
-                });
-                window.location.replace("/");
-            }
-        })
+                    this.setState({
+                        password: "",
+                        rePassword: ""
+                    });
+                    window.location.replace("/");
+                }
+            })
+        }
     }
 
 

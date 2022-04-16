@@ -58,8 +58,6 @@ export default class SignUp extends Component {
                     password: "",
                     show: true
                 })
-                //this.props.setToken(res.sessionToken)
-
             }
         })
     }
@@ -92,7 +90,7 @@ export default class SignUp extends Component {
 
                                 <div className="col md-6">
                                     <div className="form-group" style={{ marginBottom: "15px" }}>
-                                        <label style={{ marginBottom: '5px' }}>Profile Photo</label>
+                                        <label style={{ marginBottom: '5px' }}>Profile Photo (Rename with admin id)</label>
                                         <input required="true" type="file" className="form-control" name="img" onChange={this.setFileName}></input>
                                     </div>
                                 </div>

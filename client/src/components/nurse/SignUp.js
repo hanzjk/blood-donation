@@ -123,7 +123,7 @@ export default class SignUp extends Component {
                                 </div>
                                 <div className="col md-6">
                                     <div className="form-group" style={{ marginBottom: "15px" }}>
-                                        <label style={{ marginBottom: '5px' }}>Profile Photo</label>
+                                        <label style={{ marginBottom: '5px' }}>Profile Photo (Rename with nurse id)</label>
                                         <input required="true" type="file" className="form-control" name="img" onChange={this.setFileName}></input>
                                     </div>
                                 </div>

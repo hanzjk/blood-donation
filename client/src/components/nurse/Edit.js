@@ -123,6 +123,8 @@ export default class Edit extends Component {
                         </div>
                     </div>
 
+                    {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
+
                     <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
                         <i className="fa fa-check-square"></i>
                         &nbsp; Update

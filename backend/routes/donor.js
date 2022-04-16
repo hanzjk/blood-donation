@@ -98,7 +98,7 @@ router.put('/donor/password/update/:id', (req, res) => {
 });
 
 //update profile photo
-router.put('/donors/update/:id', upload.single('img'), (req, res) => {
+router.put('/donor/photo/update/:id', upload.single('img'), (req, res) => {
     req.body.img = req.file.originalname;
     Donor.findByIdAndUpdate(
         req.params.id,

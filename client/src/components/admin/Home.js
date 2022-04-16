@@ -199,7 +199,7 @@ export default class Home extends Component {
                                         <div className="mt-12">
                                             <a className="btn btn-success " href={`/admin/edit/${this.state.admin._id}`}>
                                                 Edit Profile <i className="fas fa-edit"></i></a>&nbsp;
-                                            <a className="btn btn-primary " href={`/admin/password/update/${this.state.admin._id}`}>
+                                            <a className="btn btn-primary " href={`/admin/photo/update/${this.state.admin._id}`}>
                                                 Change Profile Photo <i className="fas fa-camera"></i></a>&nbsp;
                                             <a className="btn btn-warning " href={`/admin/password/update/${this.state.admin._id}`}>
                                                 Change Password <i className="fas fa-unlock"></i></a>&nbsp;
