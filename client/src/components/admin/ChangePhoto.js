@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Header from './Header';
+import NavBar from "./NavBar";
 
 
 export default class ChangePhoto extends Component {
@@ -60,32 +60,58 @@ export default class ChangePhoto extends Component {
 
     render() {
         return (
-            <div>
-                <Header />
-                <div className="container">
-                    <div className="col-md-8 mt-4 mx-auto">
-                        <h1 className="h3 mb-3 font-weight-normal">Change Profile Photo</h1>
-                        <h6 style={{ marginBottom: '5px' }}>Current Photo</h6>
-                        <div className="d-flex flex-column align-items-center text-center">
-                            <img src={`/../uploads/admin/${this.state.admin.img}`} alt="photo" style={{ width: "15%", height: "15%", marginLeft: "auto", marginRight: "auto" }}></img>
-                        </div>
-                        <form className="needs-validation" noValidate>
-                            <div className="form-group" style={{ marginBottom: "15px" }}>
-                                <label style={{ marginBottom: '5px' }}>Change Profile Photo (Rename with admin id)</label>
-                                <input required="true" type="file" className="form-control" name="img" onChange={this.setFileName}></input>
-                            </div>
-                            {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
-                            {/* {this.state.success ? (<div className="alert alert-success">{this.state.success}</div>) : null} */}
-                            <div className="d-grid">
-                                <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
-                                    <i className="fa fa-check-square"></i>
-                        &nbsp; Update Photo
-                        </button>
-                            </div>
-                        </form>
-                    </div>
+          <div>
+            <NavBar />
+            <div className="container">
+              <div className="col-md-8 mt-4 mx-auto">
+                <h1 className="h3 mb-3 font-weight-normal">
+                  Change Profile Photo
+                </h1>
+                <h6 style={{ marginBottom: "5px" }}>Current Photo</h6>
+                <div className="d-flex flex-column align-items-center text-center">
+                  <img
+                    src={`/../uploads/admin/${this.state.admin.img}`}
+                    alt="photo"
+                    style={{
+                      width: "15%",
+                      height: "15%",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                    }}
+                  ></img>
                 </div>
+                <form className="needs-validation" noValidate>
+                  <div className="form-group" style={{ marginBottom: "15px" }}>
+                    <label style={{ marginBottom: "5px" }}>
+                      Change Profile Photo (Rename with admin id)
+                    </label>
+                    <input
+                      required="true"
+                      type="file"
+                      className="form-control"
+                      name="img"
+                      onChange={this.setFileName}
+                    ></input>
+                  </div>
+                  {this.state.error ? (
+                    <div className="alert alert-danger">{this.state.error}</div>
+                  ) : null}
+                  {/* {this.state.success ? (<div className="alert alert-success">{this.state.success}</div>) : null} */}
+                  <div className="d-grid">
+                    <button
+                      className="btn btn-success"
+                      type="submit"
+                      style={{ marginTop: "15px" }}
+                      onClick={this.onSubmit}
+                    >
+                      <i className="fa fa-check-square"></i>
+                      &nbsp; Update Photo
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-        )
+          </div>
+        );
     }
 }
