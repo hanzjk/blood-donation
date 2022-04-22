@@ -169,7 +169,8 @@ export default class Home extends Component {
         }
         return (
           <div>
-            <NavBar />
+              <NavBar />
+
             <div className="container">
               <div className="row">
                 <div className="card" style={{ margin: "20px" }}>
