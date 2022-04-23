@@ -3,12 +3,17 @@
   align-items: center;
   padding: 10px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 1px;
+  background-color: #1F305E;
+  color: aliceblue;
+
 }
 
 .conversation:hover {
-  background-color: rgb(245, 243, 243);
+  background-color:#041E42;
 }
+
+
 
 .conversationImg {
   width: 40px;
@@ -20,6 +25,7 @@
 
 .conversationName {
   font-weight: 500;
+  font-size: large;
 }
 
 @media screen and (max-width: 768px) {

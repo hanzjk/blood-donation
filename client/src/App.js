@@ -27,6 +27,8 @@ import SignUpNurse from './components/nurse/SignUp'
 import HeaderNurse from './components/nurse/Header'
 import UpdatePwdAdmin from "./components/admin/UpdatePassword"
 import UpdatePhotoAdmin from './components/admin/ChangePhoto'
+import Header from './components/admin/Header'
+
 
 
 export default class App extends Component {
@@ -34,6 +36,7 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        <Header></Header>
         <Route exact path="/admins/save" component={SignUpAdmin} />
         <Route exact path="/admin/home" component={AdminHome} />
         <Route exact path="/admin/login" component={LoginAdmin} />
