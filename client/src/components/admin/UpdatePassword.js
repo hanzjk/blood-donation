@@ -61,26 +61,30 @@ export default class UpdatePassword extends Component {
             <div>
                 <Header />
                 <div className="container">
-                    <div className="col-md-8 mt-4 mx-auto">
-                        <h1 className="h3 mb-3 font-weight-normal">Change Password</h1>
-                        <form className="needs-validation" noValidate>
-                            <div className="form-group" style={{ marginBottom: "15px" }}>
-                                <label style={{ marginBottom: '5px' }}>Password</label>
-                                <input type="password" className="form-control" name="password" placeholder="Enter index no" value={this.state.password} onChange={this.handleInputChange}></input>
-                            </div>
+                    <div className="col-md-8 mx-auto">
+                        <div className="row">
+                            <div className="card mt-4" style={{ border: "none" }}>
+                                <h1 className="h3 mb-3 font-weight-normal">Change Password</h1>
+                                <form className="needs-validation" noValidate>
+                                    <div className="form-group" style={{ marginBottom: "15px" }}>
+                                        <label style={{ marginBottom: '5px' }}>Password</label>
+                                        <input type="password" className="form-control" name="password" placeholder="Enter index no" value={this.state.password} onChange={this.handleInputChange}></input>
+                                    </div>
 
-                            <div className="form-group" style={{ marginBottom: "15px" }}>
-                                <label style={{ marginBottom: '5px' }}>Reenter Password</label>
-                                <input type="password" className="form-control" name="rePassword" placeholder="Enter rePassword" value={this.state.rePassword} onChange={this.handleInputChange}></input>
-                            </div>
+                                    <div className="form-group" style={{ marginBottom: "15px" }}>
+                                        <label style={{ marginBottom: '5px' }}>Reenter Password</label>
+                                        <input type="password" className="form-control" name="rePassword" placeholder="Enter rePassword" value={this.state.rePassword} onChange={this.handleInputChange}></input>
+                                    </div>
 
-                            <div className="d-grid">
-                                <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
-                                    <i className="fa fa-check-square"></i>
+                                    <div className="d-grid">
+                                        <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
+                                            <i className="fa fa-check-square"></i>
                         &nbsp; Update Password
                         </button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

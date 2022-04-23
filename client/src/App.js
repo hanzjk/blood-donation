@@ -28,6 +28,7 @@ import HeaderNurse from './components/nurse/Header'
 import UpdatePwdAdmin from "./components/admin/UpdatePassword"
 import UpdatePhotoAdmin from './components/admin/ChangePhoto'
 
+
 export default class App extends Component {
 
   render() {
@@ -60,6 +61,7 @@ export default class App extends Component {
         <Route exact path="/patients/add" component={SignUpPatient} />
         <Route exact path="/patient/edit/:id" component={EditPatient} />
         <Route exact path="/patient/login" component={LoginPatient} />
+
       </BrowserRouter>
     );
   }

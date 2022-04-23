@@ -144,6 +144,7 @@ export default class GetNurses extends Component {
 
         return (
             <nav>
+                <br></br>
                 <ul className="pagination">
                     <li className="page-item">
                         <button
@@ -216,7 +217,7 @@ export default class GetNurses extends Component {
     render() {
         return (
             <div>
-                <Header />
+               <Header />
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-9 mt-2 mb-2">
@@ -238,7 +239,7 @@ export default class GetNurses extends Component {
                 </div>
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton  style={{backgroundColor:"#C41E3A",color:"white"}}>
+                    <Modal.Header closeButton style={{ backgroundColor: "#C41E3A", color: "white" }}>
                         <Modal.Title> Delete Nurse</Modal.Title>
                     </Modal.Header>
                     <Modal.Body style={{ textAlign: "center" }}>Delete this nurse?</Modal.Body>
@@ -253,7 +254,7 @@ export default class GetNurses extends Component {
                 </Modal>
 
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
-                    <Modal.Header closeButton style={{backgroundColor:"#5D8AA8",color:"white"}}>
+                    <Modal.Header closeButton style={{ backgroundColor: "#5D8AA8", color: "white" }}>
                         <Modal.Title>Nurse Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>

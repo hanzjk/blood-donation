@@ -12,9 +12,9 @@ export default class GetDonors extends Component {
             donors: [],
             id: "",
             show: false,
-            showDetails:false,
-            donId:"",
-            donor:{}
+            showDetails: false,
+            donId: "",
+            donor: {}
         }
     }
 
@@ -31,18 +31,18 @@ export default class GetDonors extends Component {
 
     handleClose = () => this.setState({
         show: false,
-        showDetails:false
+        showDetails: false
     });
     handleShowDelete = (id) => this.setState({
         show: true,
-        donId:id
+        donId: id
     });
 
     handleShowDonor = (id) => axios.get(`http://localhost:8000/donor/${id}`).then((res) => {
         if (res.data.success) {
             this.setState({
-                showDetails:true,
-                donor:res.data.donor
+                showDetails: true,
+                donor: res.data.donor
             });
 
             console.log(this.state.donor);
@@ -121,11 +121,11 @@ export default class GetDonors extends Component {
         },
         {
             name: "Delete",
-            selector: (row) =><Button variant="danger" size="sm" onClick={()=>this.handleShowDelete(row._id)}>Delete</Button>
+            selector: (row) => <Button variant="danger" size="sm" onClick={() => this.handleShowDelete(row._id)}>Delete</Button>
         },
         {
             name: "View",
-            selector: (row) =><Button variant="primary" size="sm" onClick={()=>this.handleShowDonor(row._id)}>View</Button>
+            selector: (row) => <Button variant="primary" size="sm" onClick={() => this.handleShowDonor(row._id)}>View</Button>
         }
     ]
 
@@ -156,6 +156,7 @@ export default class GetDonors extends Component {
 
         return (
             <nav>
+                <br></br>
                 <ul className="pagination">
                     <li className="page-item">
                         <button
@@ -203,7 +204,7 @@ export default class GetDonors extends Component {
 
     filterData(donors, searchKey) {
         const result = donors.filter((donor) =>
-            donor.name.toLowerCase().includes(searchKey) || donor.name.toUpperCase().includes(searchKey) || 
+            donor.name.toLowerCase().includes(searchKey) || donor.name.toUpperCase().includes(searchKey) ||
             donor.bloodType.toLowerCase().includes(searchKey) || donor.bloodType.toUpperCase().includes(searchKey)
             || donor.address.toLowerCase().includes(searchKey) || donor.address.toUpperCase().includes(searchKey)
         )
@@ -249,12 +250,12 @@ export default class GetDonors extends Component {
                         defaultSortFieldID={1}
                     />
                 </div>
-                
+
                 <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton style={{backgroundColor:"#C41E3A",color:"white"}}>
+                    <Modal.Header closeButton style={{ backgroundColor: "#C41E3A", color: "white" }}>
                         <Modal.Title> Delete Donor</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body style={{textAlign:"center"}}>Delete this donor?</Modal.Body>
+                    <Modal.Body style={{ textAlign: "center" }}>Delete this donor?</Modal.Body>
                     <Modal.Footer>
                         <Button variant="danger" onClick={() => this.onDelete(this.state.donId)}>
                             Yes
@@ -266,44 +267,44 @@ export default class GetDonors extends Component {
                 </Modal>
 
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
-                    <Modal.Header closeButton style={{backgroundColor:"#5D8AA8",color:"white"}}>
+                    <Modal.Header closeButton style={{ backgroundColor: "#5D8AA8", color: "white" }}>
                         <Modal.Title>Donor Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="card" style={{ margin: "20px" , border:"none"}}>
-                                <div className="card-body">
-                                    <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.donor.name}</h5>
-                                    <br></br>
-                                    <div className="d-flex flex-column align-items-center text-center">
-                                        <img src={`../../uploads/donor/${this.state.donor.img}`} alt="photo" style={{ width: "25%", height: "25%", marginLeft: "auto", marginRight: "auto" }}></img>
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="card" style={{ margin: "20px", border: "none" }}>
+                                    <div className="card-body">
+                                        <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.donor.name}</h5>
+                                        <br></br>
+                                        <div className="d-flex flex-column align-items-center text-center">
+                                            <img src={`../../uploads/donor/${this.state.donor.img}`} alt="photo" style={{ width: "25%", height: "25%", marginLeft: "auto", marginRight: "auto" }}></img>
+                                        </div>
                                     </div>
-                                </div>
-                                <dl className="d-flex align-items-center">
-                                    <dl className="row">
-                                        <dt className="col-lg-5">Address</dt>
-                                        <dd className="col-lg-7">{this.state.donor.address}</dd>
-                                        <hr></hr>
-                                        <dt className="col-lg-5">Gender</dt>
-                                        <dd className="col-lg-7">{this.state.donor.gender}</dd>
-                                        <hr></hr>
-                                        <dt className="col-lg-5">NIC</dt>
-                                        <dd className="col-lg-7">{this.state.donor.nic}</dd>
-                                        <hr></hr>
-                                        <dt className="col-lg-5">Blood Group</dt>
-                                        <dd className="col-lg-7">{this.state.donor.bloodType}</dd>
-                                        <hr></hr>
-                                        <dt className="col-lg-5">Contact Number</dt>
-                                        <dd className="col-lg-7">{this.state.donor.contact}</dd>
-                                        <hr></hr>
-                                        <dt className="col-lg-5">Email</dt>
-                                        <dd className="col-lg-7">{this.state.donor.email}</dd>
+                                    <dl className="d-flex align-items-center">
+                                        <dl className="row">
+                                            <dt className="col-lg-5">Address</dt>
+                                            <dd className="col-lg-7">{this.state.donor.address}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Gender</dt>
+                                            <dd className="col-lg-7">{this.state.donor.gender}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">NIC</dt>
+                                            <dd className="col-lg-7">{this.state.donor.nic}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Blood Group</dt>
+                                            <dd className="col-lg-7">{this.state.donor.bloodType}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Contact Number</dt>
+                                            <dd className="col-lg-7">{this.state.donor.contact}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Email</dt>
+                                            <dd className="col-lg-7">{this.state.donor.email}</dd>
+                                        </dl>
                                     </dl>
-                                </dl>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>

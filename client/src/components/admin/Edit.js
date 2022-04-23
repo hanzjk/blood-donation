@@ -9,7 +9,7 @@ export default class Edit extends Component {
             name: "",
             adminId: "",
             email: "",
-            error:""
+            error: ""
         }
     }
 
@@ -26,7 +26,7 @@ export default class Edit extends Component {
 
                 console.log(this.state.admin);
             }
-            else{
+            else {
                 this.setState({
                     error: "Something went wrong. Please try again later."
                 });
@@ -64,14 +64,14 @@ export default class Edit extends Component {
                     name: "",
                     adminId: "",
                     email: "",
-                    error:""
+                    error: ""
                 })
                 window.location.replace("http://localhost:3000/admin/home");
             }
 
-            else if(res.data.error){
+            else if (res.data.error) {
                 this.setState({
-                    error:"Something went wrong. Please try agin later."
+                    error: "Something went wrong. Please try agin later."
                 })
             }
         })
@@ -83,34 +83,36 @@ export default class Edit extends Component {
             <div>
                 <Header />
                 <div className="container">
-                    <div className="col-md-8 mt-4 mx-auto">
+                    <div className="col-md-8 mx-auto">
                         <div className="row">
-                            <h1 className="h3 mb-3 font-weight-normal">Edit Admin</h1>
-                            <form className="needs-validation  align-items-center" noValidate>
-                                <div className="form-group" style={{ marginBottom: "15px" }}>
-                                    <label style={{ marginBottom: '5px' }}>Name</label>
-                                    <input type="text" className="form-control" name="name" placeholder="Enter name" value={this.state.name} onChange={this.handleInputChange}></input>
-                                </div>
+                            <div className="card mt-4" style={{ border: "none" }}>
+                                <h1 className="h3 mb-3 font-weight-normal">Edit Admin</h1>
+                                <form className="needs-validation  align-items-center" noValidate>
+                                    <div className="form-group" style={{ marginBottom: "15px" }}>
+                                        <label style={{ marginBottom: '5px' }}>Name</label>
+                                        <input type="text" className="form-control" name="name" placeholder="Enter name" value={this.state.name} onChange={this.handleInputChange}></input>
+                                    </div>
 
-                                <div className="form-group" style={{ marginBottom: "15px" }}>
-                                    <label style={{ marginBottom: '5px' }}>Admin Id</label>
-                                    <input type="text" className="form-control" name="adminId" placeholder="Enter Admin Id" value={this.state.adminId} onChange={this.handleInputChange}></input>
-                                </div>
+                                    <div className="form-group" style={{ marginBottom: "15px" }}>
+                                        <label style={{ marginBottom: '5px' }}>Admin Id</label>
+                                        <input type="text" className="form-control" name="adminId" placeholder="Enter Admin Id" value={this.state.adminId} onChange={this.handleInputChange}></input>
+                                    </div>
 
-                                <div className="form-group" style={{ marginBottom: "15px" }}>
-                                    <label style={{ marginBottom: '5px' }}>Email Address</label>
-                                    <input type="email" className="form-control" name="email" placeholder="Enter email address" value={this.state.email} onChange={this.handleInputChange}></input>
-                                </div>
+                                    <div className="form-group" style={{ marginBottom: "15px" }}>
+                                        <label style={{ marginBottom: '5px' }}>Email Address</label>
+                                        <input type="email" className="form-control" name="email" placeholder="Enter email address" value={this.state.email} onChange={this.handleInputChange}></input>
+                                    </div>
 
-                                {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
+                                    {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
 
-                                <div className="d-grid">
-                                    <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
-                                        <i className="fa fa-check-square"></i>
-                        &nbsp; Update
-                        </button>
-                                </div>
-                            </form>
+                                    <div className="d-grid">
+                                        <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
+                                            <i className="fa fa-check-square"></i>
+                                        &nbsp; Update
+                                         </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

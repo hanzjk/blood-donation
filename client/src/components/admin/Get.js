@@ -10,7 +10,7 @@ export default class Get extends Component {
         super(props);
         this.state = {
             admins: [],
-            admin:{}
+            admin: {}
         }
     }
 
@@ -205,7 +205,7 @@ export default class Get extends Component {
                     />
                 </div>
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
-                    <Modal.Header closeButton style={{backgroundColor:"#5D8AA8",color:"white"}}>
+                    <Modal.Header closeButton style={{ backgroundColor: "#5D8AA8", color: "white" }}>
                         <Modal.Title>Admin Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>

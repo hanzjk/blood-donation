@@ -11,9 +11,9 @@ export default class GetHospitals extends Component {
             hospitals: [],
             id: "",
             show: false,
-            showDetails:false,
-            hospitalId:"",
-            hospital:{}
+            showDetails: false,
+            hospitalId: "",
+            hospital: {}
         }
     }
 
@@ -30,18 +30,18 @@ export default class GetHospitals extends Component {
 
     handleClose = () => this.setState({
         show: false,
-        showDetails:false
+        showDetails: false
     });
     handleShowDelete = (id) => this.setState({
         show: true,
-        patientId:id
+        patientId: id
     });
 
     handleShowHospital = (id) => axios.get(`http://localhost:8000/hospital/${id}`).then((res) => {
         if (res.data.success) {
             this.setState({
-                showDetails:true,
-                hospital:res.data.hospital
+                showDetails: true,
+                hospital: res.data.hospital
             });
 
             console.log(this.state.hospital);
@@ -101,11 +101,11 @@ export default class GetHospitals extends Component {
         },
         {
             name: "Delete",
-            selector: (row) =><Button variant="danger" size="sm" onClick={()=>this.handleShowDelete(row._id)}>Delete</Button>
+            selector: (row) => <Button variant="danger" size="sm" onClick={() => this.handleShowDelete(row._id)}>Delete</Button>
         },
         {
             name: "View",
-            selector: (row) =><Button variant="primary" size="sm" onClick={()=>this.handleShowHospital(row._id)}>View</Button>
+            selector: (row) => <Button variant="primary" size="sm" onClick={() => this.handleShowHospital(row._id)}>View</Button>
         }
     ]
 
@@ -136,6 +136,7 @@ export default class GetHospitals extends Component {
 
         return (
             <nav>
+                <br></br>
                 <ul className="pagination">
                     <li className="page-item">
                         <button
@@ -227,12 +228,12 @@ export default class GetHospitals extends Component {
                         defaultSortFieldID={1}
                     />
                 </div>
-                
+
                 <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton  style={{backgroundColor:"#C41E3A",color:"white"}}>
+                    <Modal.Header closeButton style={{ backgroundColor: "#C41E3A", color: "white" }}>
                         <Modal.Title> Delete Hospital Account</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body style={{textAlign:"center"}}>Delete this account?</Modal.Body>
+                    <Modal.Body style={{ textAlign: "center" }}>Delete this account?</Modal.Body>
                     <Modal.Footer>
                         <Button variant="danger" onClick={() => this.onDelete(this.state.hospitalId)}>
                             Yes
@@ -244,32 +245,32 @@ export default class GetHospitals extends Component {
                 </Modal>
 
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
-                    <Modal.Header closeButton style={{backgroundColor:"#5D8AA8",color:"white"}}>
+                    <Modal.Header closeButton style={{ backgroundColor: "#5D8AA8", color: "white" }}>
                         <Modal.Title>Hospital Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="card" style={{ margin: "20px" , border:"none"}}>
-                                <div className="card-body">
-                                    <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.hospital.name}</h5>
-                                    <br></br>
-                                </div>
-                                <dl className="d-flex align-items-center">
-                                    <dl className="row">
-                                        <dt className="col-lg-5">Address</dt>
-                                        <dd className="col-lg-7">{this.state.hospital.address}</dd>
-                                        <hr></hr>
-                                        <dt className="col-lg-5">Contact Number</dt>
-                                        <dd className="col-lg-7">{this.state.hospital.contact}</dd>
-                                        <hr></hr>
-                                        <dt className="col-lg-5">Email</dt>
-                                        <dd className="col-lg-7">{this.state.hospital.email}</dd>
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="card" style={{ margin: "20px", border: "none" }}>
+                                    <div className="card-body">
+                                        <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.hospital.name}</h5>
+                                        <br></br>
+                                    </div>
+                                    <dl className="d-flex align-items-center">
+                                        <dl className="row">
+                                            <dt className="col-lg-5">Address</dt>
+                                            <dd className="col-lg-7">{this.state.hospital.address}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Contact Number</dt>
+                                            <dd className="col-lg-7">{this.state.hospital.contact}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Email</dt>
+                                            <dd className="col-lg-7">{this.state.hospital.email}</dd>
+                                        </dl>
                                     </dl>
-                                </dl>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
