@@ -151,6 +151,21 @@ router.get('/donor/:id', (req, res) => {
     })
 })
 
+//get donors count
+router.get('/donors/count', (req, res) => {
+    Donor.find().exec((err, results) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+        return res.status(200).json({
+            count: results.length
+        });
+    })
+})
+
+
 //login
 router.post('/donor/login', (req, res) => {
     Donor.findOne({ email: req.body.userName }).then(user => {

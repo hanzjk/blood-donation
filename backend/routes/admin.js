@@ -168,6 +168,20 @@ router.get('/admin/home/:id', (req, res) => {
     })
 });
 
+//get admins count
+router.get('/admins/count', (req, res) => {
+    Admin.find().exec((err, results) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+        return res.status(200).json({
+            count: results.length
+        });
+    })
+})
+
 //login
 router.post('/admin/login', (req, res) => {
     Admin.findOne({ email: req.body.userName }).then(user => {

@@ -113,6 +113,20 @@ router.get('/patient/:id',(req,res)=>{
     })
 })
 
+//get patients count
+router.get('/patients/count', (req, res) => {
+    Patients.find().exec((err, results) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+        return res.status(200).json({
+            count: results.length
+        });
+    })
+})
+
 //login
 router.post('/patient/login', (req, res) => {
     Patients.findOne({ email: req.body.userName }).then(user => {

@@ -113,6 +113,20 @@ router.get('/hospital/:id',(req,res)=>{
     })
 })
 
+//get hospitals count
+router.get('/hospitals/count', (req, res) => {
+    Hospital.find().exec((err, results) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+        return res.status(200).json({
+            count: results.length
+        });
+    })
+})
+
 //login
 router.post('/donor/login', (req, res) => {
     Hospital.findOne({ email: req.body.hospitalName }).then(user => {

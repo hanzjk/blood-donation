@@ -16,6 +16,11 @@ export default class Home extends Component {
       greet: "",
       time: "",
       date: "",
+      adminCount: 0,
+      denoCount: 0,
+      patientCount: 0,
+      nurseCount: 0,
+      hosCount: 0,
     };
   }
 
@@ -41,6 +46,62 @@ export default class Home extends Component {
     /////////////////////////////////////////////////
     //get userID from JWT Token
     const id = jwt_decode(localStorage.getItem("token")).userId;
+
+
+    //get admins count
+    axios
+      .get(`http://localhost:8000/admins/count`)
+      .then((res) => {
+        if (res.data.count) {
+          this.setState({
+            adminCount: res.data.count,
+          });
+        }
+      });
+
+    //get donors count
+    axios
+      .get(`http://localhost:8000/donors/count`)
+      .then((res) => {
+        if (res.data.count) {
+          this.setState({
+            donorCount: res.data.count,
+          });
+        }
+      });
+
+    //get hospitals count
+    axios
+      .get(`http://localhost:8000/hospitals/count`)
+      .then((res) => {
+        if (res.data.count) {
+          this.setState({
+            hosCount: res.data.count,
+          });
+        }
+      });
+
+    //get nurses count
+    axios
+      .get(`http://localhost:8000/nurses/count`)
+      .then((res) => {
+        if (res.data.count) {
+          this.setState({
+            nurseCount: res.data.count,
+          });
+        }
+      });
+
+    //get patients count
+    axios
+      .get(`http://localhost:8000/patients/count`)
+      .then((res) => {
+        if (res.data.count) {
+          this.setState({
+            patientCount: res.data.count,
+          });
+        }
+      });
 
     axios.get(`http://localhost:8000/admin/home/${id}`).then((res) => {
       if (res.data.success) {
@@ -126,14 +187,14 @@ export default class Home extends Component {
         {
           label: "Blood Stock",
           backgroundColor: [
-            "#B21F00",
-            "#C9DE00",
-            "#006B3C",
-            "#00A6B4",
-            "#6800B4",
-            "#FC8EAC",
-            "#002147",
-            "#03C03C",
+            "#002366",
+            "#120A8F",
+            "#003399",
+            "#1560BD",
+            "#007BA7",
+            "#5D8AA8",
+            "#318CE7",
+            "#A1CAF1",
           ],
           borderWidth: 2,
           data: [
@@ -150,51 +211,11 @@ export default class Home extends Component {
       ],
     };
 
-    const pieData = {
-      labels: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
-      datasets: [
-        {
-          label: "Rainfall",
-          backgroundColor: [
-            "#B21F00",
-            "#C9DE00",
-            "#006B3C",
-            "#00A6B4",
-            "#6800B4",
-            "#FC8EAC",
-            "#002147",
-            "#03C03C",
-          ],
-          hoverBackgroundColor: [
-            "#501800",
-            "#4B5000",
-            "#175000",
-            "#003350",
-            "#35014F",
-            "#501800",
-            "#4B5000",
-            "#175000",
-          ],
-          data: [
-            this.state.stock.Aplus,
-            this.state.stock.Amin,
-            this.state.stock.Bplus,
-            this.state.stock.Bmin,
-            this.state.stock.ABplus,
-            this.state.stock.ABmin,
-            this.state.stock.Oplus,
-            this.state.stock.Omin,
-          ],
-        },
-      ],
-    };
-
     return (
       <div>
-        <NavBar />
-
+        <Header />
         <div className="container">
-          <div className="row">
+          <div className="flex-row">
             <div className="card" style={{ margin: "20px" }}>
               <div className="card-body">
                 <span style={{ color: "blue" }}>
@@ -202,8 +223,8 @@ export default class Home extends Component {
                     {this.state.greet} Dr.{this.state.admin.name}!
                   </h3>
                   <div style={{ float: "right" }}>
-                    <h3>{this.state.date}</h3>
-                    <h3>{this.state.time}</h3>
+                    <h5>{this.state.date}</h5>
+                    <h5>{this.state.time}</h5>
                   </div>
                 </span>
                 <p>
@@ -213,8 +234,65 @@ export default class Home extends Component {
             </div>
           </div>
           <div className="row">
+            <div className="col-lg-2">
+              <div className="card" style={{ margin: "20px" }}>
+                <div className="card-body">
+                  <span style={{ float: "right" }}><i class="fa fa-user-md" aria-hidden="true"></i></span>
+                  <div className="d-flex flex-column align-items-center text-center">
+                    <a style={{ textDecoration: "none" }} href="/admins"><span style={{ fontWeight: "bold" }}>{this.state.adminCount}</span></a>Admins
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-2">
+              <div className="card" style={{ margin: "20px" }}>
+                <div className="card-body">
+                  <span style={{ float: "right" }}><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
+                  <div className="d-flex flex-column align-items-center text-center">
+                    <a style={{ textDecoration: "none" }} href="/admin/donors"><span style={{ fontWeight: "bold" }}>{this.state.donorCount}</span></a>Donors
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-2">
+              <div className="card" style={{ margin: "20px" }}>
+                <div className="card-body">
+                  <span style={{ float: "right" }}><i class="fa fa-medkit" aria-hidden="true"></i></span>
+                  <div className="d-flex flex-column align-items-center text-center">
+                    <a style={{ textDecoration: "none" }} href="/admin/nurses"><span style={{ fontWeight: "bold" }}>{this.state.nurseCount}</span></a>Nurses
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-2">
+              <div className="card" style={{ margin: "20px" }}>
+                <div className="card-body">
+                  <span style={{ float: "right" }}><i class="fa fa-hospital-o" aria-hidden="true"></i></span>
+                  <div className="d-flex flex-column align-items-center text-center">
+                    <a style={{ textDecoration: "none" }} href="/admin/hospitals"><span style={{ fontWeight: "bold" }}>{this.state.hosCount}</span></a>Hospitals
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-2">
+              <div className="card" style={{ margin: "20px" }}>
+                <div className="card-body">
+                  <span style={{ float: "right" }}><i class="fa fa-users" aria-hidden="true"></i></span>
+                  <div className="d-flex flex-column align-items-center text-center">
+                    <a style={{ textDecoration: "none" }} href="/admin/patients"><span style={{ fontWeight: "bold" }}>{this.state.patientCount}</span></a>Patients
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-2">
+              <div className="card" style={{ margin: "20px" }}>
+                <div className="card-body"></div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
             <div className="col-lg-7">
-              <div className="card">
+              <div className="card" style={{ margin: "20px" }}>
                 <div className="card-body">
                   <h5
                     className="card-title"
@@ -299,88 +377,6 @@ export default class Home extends Component {
                 </dl>
               </div>
             </div>
-
-            <div className="col-lg-5">
-              <div className="card">
-                <div className="card-body">
-                  <h5
-                    className="card-title"
-                    style={{
-                      textAlign: "center",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    Chat
-                  </h5>
-                  <br></br>
-                  <div className="row">
-                    <div className="col-md-5">
-                      <div className="card" style={{ margin: "20px" }}>
-                        <div className="card-body">
-                          <h5
-                            className="card-title"
-                            style={{
-                              textAlign: "center",
-                              textTransform: "uppercase",
-                            }}
-                          >
-                            Donors
-                          </h5>
-                          <div className="d-flex flex-column align-items-center text-center">
-                            <img
-                              src={`../../assets/donors.gif`}
-                              alt="donors"
-                              style={{
-                                width: "66%",
-                                height: "66%",
-                                marginLeft: "auto",
-                                marginRight: "auto",
-                              }}
-                            ></img>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-5">
-                    <div className="card" style={{ margin: "20px" }}>
-                      <div className="card-body">
-                        <h5
-                          className="card-title"
-                          style={{
-                            textAlign: "center",
-                            textTransform: "uppercase",
-                          }}
-                        >
-                          Receivers
-                        </h5>
-                        <div className="d-flex flex-column align-items-center text-center">
-                          <img
-                            src={`../../assets/receivers.gif`}
-                            alt="receivers"
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              marginLeft: "auto",
-                              marginRight: "auto",
-                            }}
-                          ></img>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            {/* <h5
-              className="card-title"
-              style={{ textAlign: "center", textTransform: "uppercase" }}
-            >
-              Current Stock
-                </h5> */}
             <div className="col-lg-5">
               <div className="card" style={{ margin: "20px" }}>
                 <div className="card-body">
@@ -391,41 +387,11 @@ export default class Home extends Component {
                       textTransform: "uppercase",
                     }}
                   >
-                    Bar Chart View
+                    Blood Stock
                   </h5>
                   <br></br>
                   <Bar
                     data={barData}
-                    options={{
-                      title: {
-                        display: true,
-                        text: "Current Blood Stock",
-                        fontSize: 20,
-                      },
-                      legend: {
-                        display: true,
-                        position: "right",
-                      },
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-5">
-              <div className="card" style={{ margin: "20px" }}>
-                <div className="card-body">
-                  <h5
-                    className="card-title"
-                    style={{
-                      textAlign: "center",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    Pie Chart View
-                  </h5>
-                  <br></br>
-                  <Pie
-                    data={pieData}
                     options={{
                       title: {
                         display: true,
