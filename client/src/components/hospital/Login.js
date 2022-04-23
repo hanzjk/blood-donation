@@ -41,7 +41,8 @@ export default class Login extends Component {
                     error: ""
                 });
                 console.log("Password matched");
-                //this.props.history.push(`/dashboard/${res.data.messageId}`)
+                localStorage.setItem("hospitalToken", res.data.token);
+                this.props.history.push(`/hospital/home`)
             }
             else {
                 if (res.data.messageUser) {
