@@ -14,7 +14,6 @@ export default function Conversation({ conversation, currentUser }) {
       try {
         const res = await axios("http://localhost:8000/donor/" + friendId);
         setUser(res.data.donor);
-        //console.log(res.data.donor);
       } catch (err) {
         console.log(err);
       }

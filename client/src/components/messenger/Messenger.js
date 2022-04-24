@@ -7,16 +7,22 @@ import Header from "../admin/Header";
 import axios from "axios";
 import { io } from "socket.io-client";
 import jwt_decode from "jwt-decode";
+import HeaderPrimary from "../admin/HeaderPrimary";
 
+
+  
 export default function Messenger() {
-  var userID = null;
-  useEffect(() => {
-     const token = localStorage.getItem("token");
 
+  const [userID, setuserID] = useState();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    
      if (!token) {
        window.location.replace("/admin/login");
      }
-     userID = jwt_decode(localStorage.getItem("token")).userId;
+    
+     setuserID(jwt_decode(localStorage.getItem("token")).userId);
   })
   
 
@@ -65,7 +71,6 @@ export default function Messenger() {
         const res = await axios.get(
           "http://localhost:8000/conversations/" + userID
         );
-        //console.log(res.data);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -120,59 +125,73 @@ export default function Messenger() {
      scrollRef.current?.scrollIntoView({ behavior: "smooth" });
    }, [messages]);
   
+  
   return (
-    <>
-      <Header />
-      <div className="messenger">
-        <div className="chatMenu">
-          <div className="chatMenuWrapper">
-            <input placeholder="Search for friends" className="chatMenuInput" />
-            {conversations.map((c) => (
-              <div onClick={() => setCurrentChat(c)} key={c._id}>
-                <Conversation
-                  conversation={c}
-                  key={c._id}
-                  currentUser={userID}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="chatBox">
-          <div className="chatBoxWrapper">
-            {currentChat ? (
-              <>
-                <div className="chatBoxTop">
-                  {messages.map((m) => (
-                    <div ref={scrollRef}>
-                      <Message
-                        message={m}
-                        own={m.sender === userID}
-                        key={m._id}
-                      />
-                    </div>
-                  ))}
+   <div >
+     {(() => {
+        if (userID) {
+          return (
+            <>
+              <HeaderPrimary />
+
+              <Header />
+
+              <div className="messenger">
+                <div className="chatMenu">
+                  <div className="chatMenuWrapper">
+                    <div className="chatTitle">Chats</div>
+                    {conversations.map((c) => (
+                      <div onClick={() => setCurrentChat(c)} key={c._id}>
+                        <Conversation
+                          conversation={c}
+                          key={c._id}
+                          currentUser={userID}
+                        />
+                        <hr style={{ color: "white" }}></hr>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="chatBoxBottom">
-                  <textarea
-                    className="chatMessageInput"
-                    placeholder="write something..."
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    value={newMessage}
-                  ></textarea>
-                  <button className="chatSubmitButton" onClick={handleSubmit}>
-                    Send
-                  </button>
+                <div className="chatBox">
+                  <div className="chatBoxWrapper">
+                    {currentChat ? (
+                      <>
+                        <div className="chatBoxTop">
+                          {messages.map((m) => (
+                            <div ref={scrollRef}>
+                              <Message
+                                message={m}
+                                own={m.sender === userID}
+                                key={m._id}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        <div className="chatBoxBottom">
+                          <textarea
+                            className="chatMessageInput"
+                            placeholder="write something..."
+                            onChange={(e) => setNewMessage(e.target.value)}
+                            value={newMessage}
+                          ></textarea>
+                          <button
+                            className="chatSubmitButton"
+                            onClick={handleSubmit}
+                          >
+                            Send
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="noConversationTextDiv">
+                        <span className="noConversationText">
+                          Open a conversation to start chat
+                        </span>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </>
-            ) : (
-              <span className="noConversationText">
-                Open a conversation to start chat
-              </span>
-            )}
-          </div>
-        </div>
-        {/* <div className="chatOnline">
+                {/* <div className="chatOnline">
           <div className="chatOnlineWrapper">
             <ChatOnline
               onlineUsers={onlineUsers}
@@ -181,7 +200,15 @@ export default function Messenger() {
             />{" "}
           </div>
         </div> */}
-      </div>
-    </>
+              </div>
+            </>
+          );
+       } else {
+          return (<></>);
+        }
+      })()}
+    </div>
   );
+  
+ 
 }

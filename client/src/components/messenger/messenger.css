@@ -1,12 +1,31 @@
 .messenger {
-  height: calc(100vh - 70px);
+  height: 90vh;
   display: flex;
+   margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  margin-top: 2% ; 
+  border-radius: 1%;
+
+ 
+
+
+  
 }
+
+
 
 .chatMenu {
   flex: 3.5;
+  background-color: #1F305E;
+  border-radius: 1%;
 }
-
+.chatTitle{
+  font-size: xx-large;
+  color: white;
+  font-weight: bolder;
+  margin-bottom: 20px;
+}
 .chatMenuInput {
   width: 90%;
   padding: 10px 0;
@@ -16,6 +35,7 @@
 
 .chatBox {
   flex: 5.5;
+  background-color: aliceblue;
 }
 
 .chatBoxWrapper {
@@ -40,18 +60,26 @@
 
 .chatMessageInput {
   width: 80%;
-  height: 90px;
+  height: 100px;
   padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  border-color: transparent;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .chatSubmitButton {
-  width: 70px;
+  width: 100px;
   height: 40px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   background-color: teal;
   color: white;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .chatOnline {
@@ -66,13 +94,15 @@
 }
 
 .noConversationText {
-  position: absolute;
-  top: 10%;
+ 
   font-size: 50px;
   color: rgb(224, 220, 220);
   cursor: default;
-}
+ }
 
+ .noConversationTextDiv{
+text-align: center;
+ }
 @media screen and (max-width: 768px) {
   .chatMenu {
     flex: 1;
