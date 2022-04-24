@@ -12,16 +12,13 @@ export default class Header extends Component {
 
   handleLogout = (e) => {
     localStorage.clear();
-    window.location.replace("/admin/login/");
+    window.location.replace("/admin/login");
   };
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#002D62" }}>
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            Admin Dashboard
-          </a>
           <button
             className="navbar-toggler"
             type="button"
@@ -34,10 +31,10 @@ export default class Header extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav" >
               <li className="nav-item">
                 <a className="nav-link" aria-current="page" href="/admin/home">
-                  <i class="fa fa-home" aria-hidden="true"></i> Home
+                  <i className="fa fa-home" aria-hidden="true"></i> Home
                 </a>
               </li>
               <li className="nav-item dropdown">
@@ -57,12 +54,12 @@ export default class Header extends Component {
                 >
                   <li>
                     <a className="dropdown-item" href="/admin/messenger">
-                      <i class="fa fa-comments" aria-hidden="true"></i> Donors
+                      <i className="fa fa-comments" aria-hidden="true"></i> Donors
                     </a>
                   </li>
                   <li>
                     <a className="dropdown-item" href="/admin/nurses">
-                      <i class="fa fa-plus-square" aria-hidden="true"></i>{" "}
+                      <i className="fa fa-plus-square" aria-hidden="true"></i>{" "}
                       Recievers
                     </a>
                   </li>
@@ -85,28 +82,27 @@ export default class Header extends Component {
                 >
                   <li>
                     <a className="dropdown-item" href="/admins/save">
-                      <i class="fa fa-address-card-o" aria-hidden="true"></i>{" "}
+                      <i className="fa fa-address-card-o" aria-hidden="true"></i>{" "}
                       Admin
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/admins/nurses">
-                      <i class="fa fa-plus-square" aria-hidden="true"></i> Nurse
+                    <a className="dropdown-item" href="/nurses/save">
+                      <i className="fa fa-plus-square" aria-hidden="true"></i> Nurse
                     </a>
                   </li>
                 </ul>
               </li>
-              <div style={{ float: "right" }}>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    aria-current="page"
-                    onClick={this.handleLogout}
-                  >
-                    <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+              <li className="nav-item" style={{ float: "right" }}>
+                <a
+                  type="button"
+                  className="nav-link"
+                  aria-current="page"
+                  onClick={this.handleLogout}
+                >
+                  <i className="fa fa-sign-out" aria-hidden="true"></i> Logout
                   </a>
-                </li>
-              </div>
+              </li>
             </ul>
           </div>
         </div>

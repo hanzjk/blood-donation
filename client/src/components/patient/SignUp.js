@@ -86,7 +86,7 @@ export default class SignUp extends Component {
                         <div className="col md-6">
                             <div className="form-group" style={{ marginBottom: "15px" }}>
                                 <label style={{ marginBottom: '5px' }}>Gender</label>
-                                <select value={this.state.gender} onChange={this.handleInputChange}>
+                                <select className="form-control" value={this.state.gender} onChange={this.handleInputChange}>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>

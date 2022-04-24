@@ -4,7 +4,7 @@ import DataTable from "react-data-table-component"
 import axios from 'axios'
 import Header from './Header';
 import { Button, Modal } from 'react-bootstrap';
-import HeaderPrimary from './HeaderPrimary';
+// import HeaderPrimary from './HeaderPrimary';
 
 export default class GetDonors extends Component {
     constructor(props) {
@@ -34,10 +34,6 @@ export default class GetDonors extends Component {
         show: false,
         showDetails: false
     });
-    handleShowDelete = (id) => this.setState({
-        show: true,
-        donId: id
-    });
 
     handleShowDonor = (id) => axios.get(`http://localhost:8000/donor/${id}`).then((res) => {
         if (res.data.success) {
@@ -49,13 +45,6 @@ export default class GetDonors extends Component {
             console.log(this.state.donor);
         }
     })
-
-    onDelete = (id) => {
-        axios.delete(`http://localhost:8000/donors/delete/${id}`).then(res => {
-            this.getDonors();
-            this.handleClose();
-        })
-    }
 
     getDonors() {
         axios.get("http://localhost:8000/donors").then(res => {
@@ -121,12 +110,8 @@ export default class GetDonors extends Component {
             sortable: true
         },
         {
-            name: "Delete",
-            selector: (row) => <Button variant="danger" size="sm" onClick={() => this.handleShowDelete(row._id)}>Delete</Button>
-        },
-        {
-            name: "View",
-            selector: (row) => <Button variant="primary" size="sm" onClick={() => this.handleShowDonor(row._id)}>View</Button>
+            name: "Donate",
+            selector: (row) => <Button variant="primary" size="sm" onClick={() => this.handleShowDonor(row._id)}>Donate</Button>
         }
     ]
 
@@ -231,7 +216,7 @@ export default class GetDonors extends Component {
     render() {
         return (
             <div>
-                <HeaderPrimary/>
+                {/* <HeaderPrimary/> */}
                 <Header />
                 <div className="container">
                     <div className="row">
@@ -252,21 +237,6 @@ export default class GetDonors extends Component {
                         defaultSortFieldID={1}
                     />
                 </div>
-
-                <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton style={{ backgroundColor: "#C41E3A", color: "white" }}>
-                        <Modal.Title> Delete Donor</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body style={{ textAlign: "center" }}>Delete this donor?</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="danger" onClick={() => this.onDelete(this.state.donId)}>
-                            Yes
-                        </Button>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            No
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
 
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
                     <Modal.Header style={{ backgroundColor: "#002D62", color: "white" }}>

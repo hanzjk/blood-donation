@@ -24,12 +24,16 @@ import EditAdmin from './components/admin/Edit'
 import GetAdmins from './components/admin/Get'
 import Messenger from './components/messenger/Messenger'
 import SignUpNurse from './components/nurse/SignUp'
-import HeaderNurse from './components/nurse/Header'
+import NurseHome from './components/nurse/Home'
 import UpdatePwdAdmin from "./components/admin/UpdatePassword"
 import UpdatePhotoAdmin from './components/admin/ChangePhoto'
-import Header from './components/admin/Header'
-
-
+import LoginNurse from './components/nurse/Login'
+import EditNurse from './components/nurse/Edit'
+import UpdatePwdNurse from "./components/nurse/UpdatePassword"
+import UpdatePhotoNurse from './components/nurse/ChangePhoto'
+import NurseGetDonors from './components/nurse/GetDonors'
+import NurseGetHospitals from './components/nurse/GetHospitals'
+import NurseGetPatients from './components/nurse/GetPatients'
 
 export default class App extends Component {
 
@@ -58,7 +62,14 @@ export default class App extends Component {
         <Route exact path="/hospitals/add" component={SignUpHospital} />
         <Route exact path="/hospital/edit/:id" component={EditHospital} />
         <Route exact path="/hospital/login" component={LoginHospital} />
-        <Route exact path="/nurse/home" component={HeaderNurse} />
+        <Route exact path="/nurse/login" component={LoginNurse} />
+        <Route exact path="/nurse/home" component={NurseHome} />
+        <Route exact path="/nurse/edit/:id" component={EditNurse} />
+        <Route exact path="/nurse/password/update/:id" component={UpdatePwdNurse} />
+        <Route exact path="/nurse/photo/update/:id" component={UpdatePhotoNurse} />
+        <Route exact path="/nurse/donors" component={NurseGetDonors} />
+        <Route exact path="/nurse/hospitals" component={NurseGetHospitals} />
+        <Route exact path="/nurse/patients" component={NurseGetPatients} />
         <Route exact path="/patients" component={GetPatients} />
         <Route exact path="/patients/add" component={SignUpPatient} />
         <Route exact path="/patient/edit/:id" component={EditPatient} />

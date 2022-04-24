@@ -155,9 +155,9 @@ export default class SignUp extends Component {
                 </div>
                 <div className="d-grid">
                   <button
-                    className="btn btn-success btn-block"
+                    className="btn btn-block"
                     type="submit"
-                    style={{ marginTop: "15px" }}
+                    style={{ marginTop: "15px", backgroundColor:"#002D62", color:"white" }}
                     onClick={this.onSubmit}
                   >
                     Create Account

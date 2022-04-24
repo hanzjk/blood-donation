@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import Header from '../admin/Header';
 import { Alert } from 'react-bootstrap';
+import HeaderPrimary from '../admin/HeaderPrimary';
 
 
 export default class SignUp extends Component {
@@ -83,6 +84,7 @@ export default class SignUp extends Component {
     render() {
         return (
             <div>
+                <HeaderPrimary/>
                 <Header />
                 <div className="container ">
                     <div className="col-md-8 mx-auto">
@@ -151,7 +153,7 @@ export default class SignUp extends Component {
                                     </div>
                                 </div>
                                 <div className="d-grid">
-                                    <button className="btn btn-success btn-md " type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
+                                    <button className="btn btn-md " type="submit" style={{ marginTop: '15px',backgroundColor:"#002D62", color:"white" }} onClick={this.onSubmit}>
                                         <i className="fa fa-check-square"></i>
                                 &nbsp; Create Account
                                 </button>

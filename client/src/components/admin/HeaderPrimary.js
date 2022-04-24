@@ -19,7 +19,8 @@ export default class HeaderPrimary extends Component {
         <>
           <Navbar className="navBar" expand="lg" sticky="top">
             <Navbar.Brand className="navBarBrand">
-              Blood Donation Management Information System
+              Admin Dashboard 
+
             </Navbar.Brand>
 
             {/* <div class=" navbar-collapse justify-content-end navBarBrand1">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Header from './Header'
 import axios from 'axios'
 
 export default class Edit extends Component {
@@ -78,58 +79,62 @@ export default class Edit extends Component {
 
     render() {
         return (
-            <div className="col-md-8 mt-4 mx-auto">
-                <h1 className="h3 mb-3 font-weight-normal">Edit Nurse</h1>
-                <form className="needs-validation" noValidate>
-                    <div className="form-group" style={{ marginBottom: "15px" }}>
-                        <label style={{ marginBottom: '5px' }}>Name</label>
-                        <input type="text" className="form-control" name="name" placeholder="Enter name" value={this.state.name} onChange={this.handleInputChange}></input>
-                    </div>
-
-                    <div className="form-group" style={{ marginBottom: "15px" }}>
-                        <label style={{ marginBottom: '5px' }}>Nurse ID</label>
-                        <input type="text" className="form-control" name="nurseId" placeholder="Enter Nurse Id" value={this.state.nurseId} onChange={this.handleInputChange}></input>
-                    </div>
-
-                    <div className="form-group" style={{ marginBottom: "15px" }}>
-                        <label style={{ marginBottom: '5px' }}>Address</label>
-                        <input type="text" className="form-control" name="address" placeholder="Enter address" value={this.state.address} onChange={this.handleInputChange}></input>
-                    </div>
-
-                    <div className="row">
-                        <div className="col md-4">
-                            <div className="form-group" style={{ marginBottom: "15px" }}>
-                                <label style={{ marginBottom: '5px' }}>Gender</label>
-                                <select value={this.state.gender} onChange={this.handleInputChange}>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                {/* <input type="text" className="form-control" name="bloodType" placeholder="Enter blood type" value={this.state.bloodType} onChange={this.handleInputChange}></input> */}
-                            </div>
-                        </div>
-                        <div className="col md-4">
-                            <div className="form-group" style={{ marginBottom: "15px" }}>
-                                <label style={{ marginBottom: '5px' }}>Contact Number</label>
-                                <input type="text" className="form-control" name="contact" placeholder="Enter contact number" value={this.state.contact} onChange={this.handleInputChange}></input>
-                            </div>
+            <div>
+                {/* <HeaderPrimary /> */}
+                <Header />
+                <div className="col-md-8 mt-4 mx-auto">
+                    <h1 className="h3 mb-3 font-weight-normal">Edit Nurse</h1>
+                    <form className="needs-validation" noValidate>
+                        <div className="form-group" style={{ marginBottom: "15px" }}>
+                            <label style={{ marginBottom: '5px' }}>Name</label>
+                            <input type="text" className="form-control" name="name" placeholder="Enter name" value={this.state.name} onChange={this.handleInputChange}></input>
                         </div>
 
-                        <div className="col md-4">
-                            <div className="form-group" style={{ marginBottom: "15px" }}>
-                                <label style={{ marginBottom: '5px' }}>Email Address</label>
-                                <input type="email" className="form-control" name="email" placeholder="Enter email address" value={this.state.email} onChange={this.handleInputChange}></input>
+                        <div className="form-group" style={{ marginBottom: "15px" }}>
+                            <label style={{ marginBottom: '5px' }}>Nurse ID</label>
+                            <input type="text" className="form-control" name="nurseId" placeholder="Enter Nurse Id" value={this.state.nurseId} onChange={this.handleInputChange}></input>
+                        </div>
+
+                        <div className="form-group" style={{ marginBottom: "15px" }}>
+                            <label style={{ marginBottom: '5px' }}>Address</label>
+                            <input type="text" className="form-control" name="address" placeholder="Enter address" value={this.state.address} onChange={this.handleInputChange}></input>
+                        </div>
+
+                        <div className="row">
+                            <div className="col md-4">
+                                <div className="form-group" style={{ marginBottom: "15px" }}>
+                                    <label style={{ marginBottom: '5px' }}>Gender</label>
+                                    <select className="form-control" value={this.state.gender} onChange={this.handleInputChange}>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col md-4">
+                                <div className="form-group" style={{ marginBottom: "15px" }}>
+                                    <label style={{ marginBottom: '5px' }}>Contact Number</label>
+                                    <input type="text" className="form-control" name="contact" placeholder="Enter contact number" value={this.state.contact} onChange={this.handleInputChange}></input>
+                                </div>
+                            </div>
+
+                            <div className="col md-4">
+                                <div className="form-group" style={{ marginBottom: "15px" }}>
+                                    <label style={{ marginBottom: '5px' }}>Email Address</label>
+                                    <input type="email" className="form-control" name="email" placeholder="Enter email address" value={this.state.email} onChange={this.handleInputChange}></input>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
+                        {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
 
-                    <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
-                        <i className="fa fa-check-square"></i>
-                        &nbsp; Update
+                        <div className="d-grid">
+                            <button className="btn" type="submit" style={{ marginTop: '15px', backgroundColor: "#002D62", color: "white" }} onClick={this.onSubmit}>
+                                <i className="fa fa-check-square"></i>&nbsp;Update
                         </button>
-                </form>
+                        </div>
+                    </form>
+                </div>
             </div>
         )
     }

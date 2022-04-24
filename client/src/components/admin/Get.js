@@ -3,6 +3,7 @@ import axios from 'axios'
 import DataTable from "react-data-table-component"
 import Header from './Header';
 import { Button, Modal } from 'react-bootstrap';
+import HeaderPrimary from './HeaderPrimary';
 
 
 export default class Get extends Component {
@@ -183,6 +184,7 @@ export default class Get extends Component {
     render() {
         return (
             <div>
+                <HeaderPrimary/>
                 <Header />
                 <div className="container">
                     <div className="row">
@@ -205,7 +207,7 @@ export default class Get extends Component {
                     />
                 </div>
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
-                    <Modal.Header closeButton style={{ backgroundColor: "#5D8AA8", color: "white" }}>
+                    <Modal.Header closeButton style={{ backgroundColor: "#002D62", color: "white" }}>
                         <Modal.Title>Admin Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>

@@ -1,26 +1,25 @@
 import React, { Component } from 'react'
-
 import DataTable from "react-data-table-component"
 import axios from 'axios'
 import Header from './Header';
+// import HeaderPrimary from './HeaderPrimary';
 import { Button, Modal } from 'react-bootstrap';
-import HeaderPrimary from './HeaderPrimary';
 
-export default class GetDonors extends Component {
+export default class GetPatients extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            donors: [],
+            patients: [],
             id: "",
             show: false,
             showDetails: false,
-            donId: "",
-            donor: {}
+            patientId: "",
+            patient: {}
         }
     }
 
     componentDidMount() {
-        this.getDonors();
+        this.getPatients();
         const id = this.props.id;
         if (id != null) {
             this.setState({
@@ -36,32 +35,32 @@ export default class GetDonors extends Component {
     });
     handleShowDelete = (id) => this.setState({
         show: true,
-        donId: id
+        patientId: id
     });
 
-    handleShowDonor = (id) => axios.get(`http://localhost:8000/donor/${id}`).then((res) => {
+    handleShowPatient = (id) => axios.get(`http://localhost:8000/patient/${id}`).then((res) => {
         if (res.data.success) {
             this.setState({
                 showDetails: true,
-                donor: res.data.donor
+                patient: res.data.patient
             });
 
-            console.log(this.state.donor);
+            console.log(this.state.patient);
         }
     })
 
     onDelete = (id) => {
-        axios.delete(`http://localhost:8000/donors/delete/${id}`).then(res => {
-            this.getDonors();
+        axios.delete(`http://localhost:8000/patients/delete/${id}`).then(res => {
+            this.getPatients();
             this.handleClose();
         })
     }
 
-    getDonors() {
-        axios.get("http://localhost:8000/donors").then(res => {
+    getPatients() {
+        axios.get("http://localhost:8000/patients").then(res => {
             if (res.data.success) {
                 this.setState({
-                    donors: res.data.existingDonors
+                    patients: res.data.existingPatients
                 });
             }
         })
@@ -83,10 +82,6 @@ export default class GetDonors extends Component {
 
     columns = [
         {
-            name: "Profile Photo",
-            selector: (row) => <img src={`/uploads/donor/${row.img}`} alt={`../uploads/donor/${row.img}`} style={{ width: "50px" }}></img>
-        },
-        {
             name: "Name",
             selector: (row) => row.name,
             sortable: true
@@ -102,8 +97,8 @@ export default class GetDonors extends Component {
             sortable: true
         },
         {
-            name: "NIC Number",
-            selector: (row) => row.nic,
+            name: "Age",
+            selector: (row) => row.age,
             sortable: true
         },
         {
@@ -121,12 +116,8 @@ export default class GetDonors extends Component {
             sortable: true
         },
         {
-            name: "Delete",
-            selector: (row) => <Button variant="danger" size="sm" onClick={() => this.handleShowDelete(row._id)}>Delete</Button>
-        },
-        {
-            name: "View",
-            selector: (row) => <Button variant="primary" size="sm" onClick={() => this.handleShowDonor(row._id)}>View</Button>
+            name: "Donate",
+            selector: (row) => <Button variant="primary" size="sm" onClick={() => this.handleShowPatient(row._id)}>Donate</Button>
         }
     ]
 
@@ -203,27 +194,25 @@ export default class GetDonors extends Component {
     };
 
 
-    filterData(donors, searchKey) {
-        const result = donors.filter((donor) =>
-            donor.name.toLowerCase().includes(searchKey) || donor.name.toUpperCase().includes(searchKey) ||
-            donor.bloodType.toLowerCase().includes(searchKey) || donor.bloodType.toUpperCase().includes(searchKey)
-            || donor.address.toLowerCase().includes(searchKey) || donor.address.toUpperCase().includes(searchKey)
+    filterData(patients, searchKey) {
+        const result = patients.filter((patient) =>
+            patient.name.toLowerCase().includes(searchKey) || patient.name.toUpperCase().includes(searchKey)
         )
         this.setState({
-            donors: result
+            patients: result
         })
     }
 
     handleSearchArea = (e) => {
         const searchKey = e.currentTarget.value;
-        axios.get("http://localhost:8000/donors").then(res => {
+        axios.get("http://localhost:8000/patient").then(res => {
             if (res.data.success) {
-                this.filterData(res.data.existingDonors, searchKey)
+                this.filterData(res.data.existingPatients, searchKey)
             }
         })
     }
 
-    SearchDonor = <div className="col-lg-3 mt-2 mb-2">
+    SearchPatient = <div className="col-lg-3 mt-2 mb-2">
         <input className="form-control" type="search" placeholder="Search" onChange={this.handleSearchArea}></input>
     </div>
 
@@ -231,20 +220,20 @@ export default class GetDonors extends Component {
     render() {
         return (
             <div>
-                <HeaderPrimary/>
+                {/* <HeaderPrimary/> */}
                 <Header />
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-9 mt-2 mb-2">
-                            <h4>All Donors</h4>
+                            <h4>All Patients</h4>
                         </div>
                     </div>
                     <DataTable
                         responsive
                         subHeader
                         columns={this.columns}
-                        data={this.state.donors}
-                        subHeaderComponent={this.SearchDonor}
+                        data={this.state.patients}
+                        subHeaderComponent={this.SearchPatient}
                         striped={true}
                         highlightOnHover={true}
                         pagination
@@ -253,55 +242,37 @@ export default class GetDonors extends Component {
                     />
                 </div>
 
-                <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton style={{ backgroundColor: "#C41E3A", color: "white" }}>
-                        <Modal.Title> Delete Donor</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body style={{ textAlign: "center" }}>Delete this donor?</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="danger" onClick={() => this.onDelete(this.state.donId)}>
-                            Yes
-                        </Button>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            No
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
                     <Modal.Header style={{ backgroundColor: "#002D62", color: "white" }}>
-                        <Modal.Title>Donor Details</Modal.Title>
+                        <Modal.Title>Patient Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="card" style={{ margin: "20px", border: "none" }}>
                                     <div className="card-body">
-                                        <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.donor.name}</h5>
+                                        <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.patient.name}</h5>
                                         <br></br>
-                                        <div className="d-flex flex-column align-items-center text-center">
-                                            <img src={`../../uploads/donor/${this.state.donor.img}`} alt="photo" style={{ width: "25%", height: "25%", marginLeft: "auto", marginRight: "auto" }}></img>
-                                        </div>
                                     </div>
                                     <dl className="d-flex align-items-center">
                                         <dl className="row">
                                             <dt className="col-lg-5">Address</dt>
-                                            <dd className="col-lg-7">{this.state.donor.address}</dd>
+                                            <dd className="col-lg-7">{this.state.patient.address}</dd>
                                             <hr></hr>
                                             <dt className="col-lg-5">Gender</dt>
-                                            <dd className="col-lg-7">{this.state.donor.gender}</dd>
+                                            <dd className="col-lg-7">{this.state.patient.gender}</dd>
                                             <hr></hr>
-                                            <dt className="col-lg-5">NIC</dt>
-                                            <dd className="col-lg-7">{this.state.donor.nic}</dd>
+                                            <dt className="col-lg-5">Age</dt>
+                                            <dd className="col-lg-7">{this.state.patient.age}</dd>
                                             <hr></hr>
                                             <dt className="col-lg-5">Blood Group</dt>
-                                            <dd className="col-lg-7">{this.state.donor.bloodType}</dd>
+                                            <dd className="col-lg-7">{this.state.patient.bloodType}</dd>
                                             <hr></hr>
                                             <dt className="col-lg-5">Contact Number</dt>
-                                            <dd className="col-lg-7">{this.state.donor.contact}</dd>
+                                            <dd className="col-lg-7">{this.state.patient.contact}</dd>
                                             <hr></hr>
                                             <dt className="col-lg-5">Email</dt>
-                                            <dd className="col-lg-7">{this.state.donor.email}</dd>
+                                            <dd className="col-lg-7">{this.state.patient.email}</dd>
                                         </dl>
                                     </dl>
                                 </div>

@@ -18,7 +18,7 @@ export default class Home extends Component {
       time: "",
       date: "",
       adminCount: 0,
-      denoCount: 0,
+      donorCount: 0,
       patientCount: 0,
       nurseCount: 0,
       hosCount: 0,
@@ -221,7 +221,7 @@ export default class Home extends Component {
           <div className="flex-row">
             <div className="card" style={{ margin: "20px" }}>
               <div className="card-body">
-                <span style={{ color: "blue" }}>
+                <span style={{ color: "#002D62" }}>
                   <h3>
                     {this.state.greet} Dr.{this.state.admin.name}!
                   </h3>
@@ -240,7 +240,7 @@ export default class Home extends Component {
             <div className="col-lg-2">
               <div className="card" style={{ margin: "20px" }}>
                 <div className="card-body">
-                  <span style={{ float: "right" }}><i class="fa fa-user-md" aria-hidden="true"></i></span>
+                  <span style={{ float: "right",color: "#002D62" }}><i className="fa fa-2x fa-user-md" aria-hidden="true"></i></span>
                   <div className="d-flex flex-column align-items-center text-center">
                     <a style={{ textDecoration: "none" }} href="/admins"><span style={{ fontWeight: "bold" }}>{this.state.adminCount}</span></a>Admins
                   </div>
@@ -250,7 +250,7 @@ export default class Home extends Component {
             <div className="col-lg-2">
               <div className="card" style={{ margin: "20px" }}>
                 <div className="card-body">
-                  <span style={{ float: "right" }}><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
+                  <span style={{ float: "right", color: "#002D62" }}><i className="fa fa-2x fa-heartbeat" aria-hidden="true"></i></span>
                   <div className="d-flex flex-column align-items-center text-center">
                     <a style={{ textDecoration: "none" }} href="/admin/donors"><span style={{ fontWeight: "bold" }}>{this.state.donorCount}</span></a>Donors
                   </div>
@@ -260,7 +260,7 @@ export default class Home extends Component {
             <div className="col-lg-2">
               <div className="card" style={{ margin: "20px" }}>
                 <div className="card-body">
-                  <span style={{ float: "right" }}><i class="fa fa-medkit" aria-hidden="true"></i></span>
+                  <span style={{ float: "right", color: "#002D62" }}><i className="fa fa-2x fa-medkit" aria-hidden="true"></i></span>
                   <div className="d-flex flex-column align-items-center text-center">
                     <a style={{ textDecoration: "none" }} href="/admin/nurses"><span style={{ fontWeight: "bold" }}>{this.state.nurseCount}</span></a>Nurses
                   </div>
@@ -270,7 +270,7 @@ export default class Home extends Component {
             <div className="col-lg-2">
               <div className="card" style={{ margin: "20px" }}>
                 <div className="card-body">
-                  <span style={{ float: "right" }}><i class="fa fa-hospital-o" aria-hidden="true"></i></span>
+                  <span style={{ float: "right", color: "#002D62" }}><i className="fa fa-2x fa-hospital-o" aria-hidden="true"></i></span>
                   <div className="d-flex flex-column align-items-center text-center">
                     <a style={{ textDecoration: "none" }} href="/admin/hospitals"><span style={{ fontWeight: "bold" }}>{this.state.hosCount}</span></a>Hospitals
                   </div>
@@ -280,7 +280,7 @@ export default class Home extends Component {
             <div className="col-lg-2">
               <div className="card" style={{ margin: "20px" }}>
                 <div className="card-body">
-                  <span style={{ float: "right" }}><i class="fa fa-users" aria-hidden="true"></i></span>
+                  <span style={{ float: "right", color: "#002D62" }}><i className="fa fa-2x fa-users" aria-hidden="true"></i></span>
                   <div className="d-flex flex-column align-items-center text-center">
                     <a style={{ textDecoration: "none" }} href="/admin/patients"><span style={{ fontWeight: "bold" }}>{this.state.patientCount}</span></a>Patients
                   </div>
