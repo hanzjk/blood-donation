@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Header from "./Header";
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import jwt_decode from "jwt-decode";
 import { Button, Modal } from "react-bootstrap";
+import Header from "./Header";
+import HeaderPrimary from "./HeaderPrimary";
 
 export default class Home extends Component {
   constructor(props) {
@@ -212,7 +213,9 @@ export default class Home extends Component {
     };
 
     return (
+      
       <div>
+        <HeaderPrimary/>
         <Header />
         <div className="container">
           <div className="flex-row">
