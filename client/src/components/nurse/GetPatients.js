@@ -14,28 +14,111 @@ export default class GetPatients extends Component {
             show: false,
             showDetails: false,
             patientId: "",
-            patient: {}
+            patient: {},
+            stock: {},
+            date: "",
+            content: 0,
+            temperature: 0,
+            pulse: 0,
+            bloodPressure: 0,
+            weight: 0,
+            error: ""
         }
     }
 
     componentDidMount() {
         this.getPatients();
-        const id = this.props.id;
-        if (id != null) {
-            this.setState({
-                id: id
-            })
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        const INFO = {
+            patientId: this.state.patient._id,
+            date: this.state.date,
+            bloodType: this.state.patient.bloodType,
+            content: parseFloat(this.state.content),
+            temperature: parseFloat(this.state.temperature),
+            pulse: parseFloat(this.state.pulse),
+            bloodPressure: parseFloat(this.state.bloodPressure),
+            weight: parseFloat(this.state.weight)
         }
-        console.log(this.state.id)
+
+        console.log(INFO);
+
+        axios.post(`http://localhost:8000/mediInfoPatient/save`, INFO).then((res) => {
+            if (res.data.success) {
+                this.setState({
+                    date: "",
+                    content: 0,
+                    temperature: 0,
+                    pulse: 0,
+                    bloodPressure: 0,
+                    weight: 0,
+                    error: ""
+                })
+                axios.get(`http://localhost:8000/bloodTypes/625180fb86e97f491d23ff7f`).then((res) => {
+                    if (res.data.success) {
+                        this.setState({
+                            stock: res.data.stock,
+                        });
+                        var newStock = 0;
+                        let STOCK = null;
+
+                        if (this.state.patient.bloodType === "A+") {
+                            newStock = parseFloat(this.state.stock.Aplus) - parseFloat(INFO.content);
+                            STOCK = { Aplus: parseFloat(newStock) }
+                        } else if (this.state.patient.bloodType === "A-") {
+                            newStock = parseFloat(this.state.stock.Amin) - parseFloat(INFO.content);
+                            STOCK = { Amin: parseFloat(newStock) }
+                        } else if (this.state.patient.bloodType === "B+") {
+                            newStock = parseFloat(this.state.stock.Bplus) - parseFloat(INFO.content);
+                            STOCK = { Bplus: parseFloat(newStock) }
+                        } else if (this.state.patient.bloodType === "B+") {
+                            newStock = parseFloat(this.state.stock.Bplus) - parseFloat(INFO.content);
+                            STOCK = { Bmin: parseFloat(newStock) }
+                        } else if (this.state.patient.bloodType === "AB+") {
+                            newStock = parseFloat(this.state.stock.ABplus) - parseFloat(INFO.content);
+                            STOCK = { ABplus: parseFloat(newStock) }
+                        } else if (this.state.patient.bloodType === "AB-") {
+                            newStock = parseFloat(this.state.stock.ABmin) - parseFloat(INFO.content);
+                            STOCK = { ABmin: parseFloat(newStock) }
+                        } else if (this.state.patient.bloodType === "O+") {
+                            newStock = parseFloat(this.state.stock.Oplus) - parseFloat(INFO.content);
+                            STOCK = { Oplus: parseFloat(newStock) }
+                        } else if (this.state.patient.bloodType === "O-") {
+                            newStock = parseFloat(this.state.stock.Omin) - parseFloat(INFO.content);
+                            STOCK = { Omin: parseFloat(newStock) }
+                        }
+                        axios.put(`http://localhost:8000/bloodTypes/update/625180fb86e97f491d23ff7f`, STOCK).then((res) => {
+                            if (res.data.success) {
+                                window.location.replace("http://localhost:3000/nurse/donations");
+                            }
+                        })
+
+                    }
+                });
+            }
+
+            else if (res.data.error) {
+                this.setState({
+                    error: "Something went wrong. Please try agin later."
+                })
+            }
+        })
+    }
+
+    handleInputChange = (e) => {
+        const { name, value } = e.target;
+
+        this.setState({
+            ...this.state,
+            [name]: value
+        })
     }
 
     handleClose = () => this.setState({
         show: false,
         showDetails: false
-    });
-    handleShowDelete = (id) => this.setState({
-        show: true,
-        patientId: id
     });
 
     handleShowPatient = (id) => axios.get(`http://localhost:8000/patient/${id}`).then((res) => {
@@ -44,17 +127,8 @@ export default class GetPatients extends Component {
                 showDetails: true,
                 patient: res.data.patient
             });
-
-            console.log(this.state.patient);
         }
     })
-
-    onDelete = (id) => {
-        axios.delete(`http://localhost:8000/patients/delete/${id}`).then(res => {
-            this.getPatients();
-            this.handleClose();
-        })
-    }
 
     getPatients() {
         axios.get("http://localhost:8000/patients").then(res => {
@@ -117,7 +191,7 @@ export default class GetPatients extends Component {
         },
         {
             name: "Donate",
-            selector: (row) => <Button variant="primary" size="sm" onClick={() => this.handleShowPatient(row._id)}>Donate</Button>
+            selector: (row) => <Button style={{ borderRadius: "20px",backgroundColor: "#002D62", color: "white" }} variant="primary" size="sm" onClick={() => this.handleShowPatient(row._id)}>Donate</Button>
         }
     ]
 
@@ -243,8 +317,8 @@ export default class GetPatients extends Component {
                 </div>
 
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
-                    <Modal.Header style={{ backgroundColor: "#002D62", color: "white" }}>
-                        <Modal.Title>Patient Details</Modal.Title>
+                    <Modal.Header closeButton style={{ backgroundColor: "#002D62", color: "white" }}>
+                        <Modal.Title>Receive Blood</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row">
@@ -254,27 +328,51 @@ export default class GetPatients extends Component {
                                         <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.patient.name}</h5>
                                         <br></br>
                                     </div>
-                                    <dl className="d-flex align-items-center">
-                                        <dl className="row">
-                                            <dt className="col-lg-5">Address</dt>
-                                            <dd className="col-lg-7">{this.state.patient.address}</dd>
-                                            <hr></hr>
-                                            <dt className="col-lg-5">Gender</dt>
-                                            <dd className="col-lg-7">{this.state.patient.gender}</dd>
-                                            <hr></hr>
-                                            <dt className="col-lg-5">Age</dt>
-                                            <dd className="col-lg-7">{this.state.patient.age}</dd>
-                                            <hr></hr>
-                                            <dt className="col-lg-5">Blood Group</dt>
-                                            <dd className="col-lg-7">{this.state.patient.bloodType}</dd>
-                                            <hr></hr>
-                                            <dt className="col-lg-5">Contact Number</dt>
-                                            <dd className="col-lg-7">{this.state.patient.contact}</dd>
-                                            <hr></hr>
-                                            <dt className="col-lg-5">Email</dt>
-                                            <dd className="col-lg-7">{this.state.patient.email}</dd>
-                                        </dl>
-                                    </dl>
+                                    <div className="col-md-8 mt-4 mx-auto">
+                                        <form className="needs-validation" noValidate>
+                                            <div className="form-group" style={{ marginBottom: "15px" }}>
+                                                <label style={{ marginBottom: '5px' }}>Date</label>
+                                                <input type="date" className="form-control" name="date" placeholder="Enter name" value={this.state.date} onChange={this.handleInputChange}></input>
+                                            </div>
+
+                                            <div className="form-group" style={{ marginBottom: "15px" }}>
+                                                <label style={{ marginBottom: '5px' }}>Blood Type</label>
+                                                <input type="text" className="form-control" name="bloodType" disabled="true" value={this.state.patient.bloodType}></input>
+                                            </div>
+
+                                            <div className="form-group" style={{ marginBottom: "15px" }}>
+                                                <label style={{ marginBottom: '5px' }}>Content</label>
+                                                <input type="text" className="form-control" name="content" placeholder="Enter content" value={this.state.content} onChange={this.handleInputChange}></input>
+                                            </div>
+
+                                            <div className="form-group" style={{ marginBottom: "15px" }}>
+                                                <label style={{ marginBottom: '5px' }}>Temperature (in celsius)</label>
+                                                <input type="text" className="form-control" name="temperature" placeholder="Enter temperature" value={this.state.temperature} onChange={this.handleInputChange}></input>
+                                            </div>
+
+                                            <div className="form-group" style={{ marginBottom: "15px" }}>
+                                                <label style={{ marginBottom: '5px' }}>Pulse (per minute)</label>
+                                                <input type="text" className="form-control" name="pulse" placeholder="Enter pulse" value={this.state.pulse} onChange={this.handleInputChange}></input>
+                                            </div>
+
+                                            <div className="form-group" style={{ marginBottom: "15px" }}>
+                                                <label style={{ marginBottom: '5px' }}>Blood Pressure (mmHg)</label>
+                                                <input type="text" className="form-control" name="bloodPressure" placeholder="Enter bloodPressure" value={this.state.bloodPressure} onChange={this.handleInputChange}></input>
+                                            </div>
+
+                                            <div className="form-group" style={{ marginBottom: "15px" }}>
+                                                <label style={{ marginBottom: '5px' }}>Weight (Kg)</label>
+                                                <input type="text" className="form-control" name="weight" placeholder="Enter weight" value={this.state.weight} onChange={this.handleInputChange}></input>
+                                            </div>
+                                            {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
+
+                                            <div className="d-grid">
+                                                <button className="btn" type="submit" style={{ marginTop: '15px', backgroundColor: "#002D62", color: "white" }} onClick={this.onSubmit}>
+                                                    Donate <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

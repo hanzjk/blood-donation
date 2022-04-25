@@ -34,6 +34,8 @@ import UpdatePhotoNurse from './components/nurse/ChangePhoto'
 import NurseGetDonors from './components/nurse/GetDonors'
 import NurseGetHospitals from './components/nurse/GetHospitals'
 import NurseGetPatients from './components/nurse/GetPatients'
+import NurseGetDonations from './components/nurse/GetDonations'
+import NurseGetBloodReceivers from './components/nurse/GetBloodReceivers'
 
 export default class App extends Component {
 
@@ -68,6 +70,8 @@ export default class App extends Component {
         <Route exact path="/nurse/password/update/:id" component={UpdatePwdNurse} />
         <Route exact path="/nurse/photo/update/:id" component={UpdatePhotoNurse} />
         <Route exact path="/nurse/donors" component={NurseGetDonors} />
+        <Route exact path="/nurse/donations" component={NurseGetDonations} />
+        <Route exact path="/nurse/receivers" component={NurseGetBloodReceivers} />
         <Route exact path="/nurse/hospitals" component={NurseGetHospitals} />
         <Route exact path="/nurse/patients" component={NurseGetPatients} />
         <Route exact path="/patients" component={GetPatients} />

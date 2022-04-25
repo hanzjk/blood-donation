@@ -200,9 +200,9 @@ export default class Home extends Component {
                             <div className="card-body">
                                 <span style={{ color: "#002D62" }}>
                                     <h3>
-                                        {this.state.greet} {this.state.nurse.gender == "Male" ? (<div>Mr.</div>) : this.state.nurse.gender == "Female" ? (<div>Mrs.</div>) :
-                                            (<div></div>)}{this.state.nurse.name}!
-                  </h3>
+                                        {this.state.greet} {this.state.nurse.gender == "Male" ? (<>Mr.</>) : this.state.nurse.gender == "Female" ? (<>Mrs.</>) :
+                                            (<></>)}{this.state.nurse.name}!
+                                </h3>
                                     <div style={{ float: "right" }}>
                                         <h5>{this.state.date}</h5>
                                         <h5>{this.state.time}</h5>
@@ -322,7 +322,7 @@ export default class Home extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <dl className="d-flex flex-column align-items-center">
+                                <dl className="d-flex flex-column align-items-center" style={{paddingLeft:"20%",paddingRight:"20%"}}>
                                     <dl className="row">
                                         <dt className="col-lg-3">Nurse ID</dt>
                                         <dd className="col-lg-9">{this.state.nurse.nurseId}</dd>

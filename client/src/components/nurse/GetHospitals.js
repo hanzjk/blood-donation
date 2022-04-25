@@ -91,7 +91,7 @@ export default class GetHospitals extends Component {
         },
         {
             name: "Donate",
-            selector: (row) => <Button variant="primary" size="sm" onClick={() => this.handleShowHospital(row._id)}>Donate</Button>
+            selector: (row) => <Button style={{borderRadius: "20px"}} variant="primary" size="sm" onClick={() => this.handleShowHospital(row._id)}>Donate</Button>
         }
     ]
 

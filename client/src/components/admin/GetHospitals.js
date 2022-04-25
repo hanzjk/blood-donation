@@ -102,11 +102,11 @@ export default class GetHospitals extends Component {
         },
         {
             name: "Delete",
-            selector: (row) => <Button variant="danger" size="sm" onClick={() => this.handleShowDelete(row._id)}>Delete</Button>
+            selector: (row) => <Button style={{borderRadius: "20px"}} variant="danger" size="sm" onClick={() => this.handleShowDelete(row._id)}>Delete</Button>
         },
         {
             name: "View",
-            selector: (row) => <Button variant="primary" size="sm" onClick={() => this.handleShowHospital(row._id)}>View</Button>
+            selector: (row) => <Button style={{borderRadius: "20px"}} variant="primary" size="sm" onClick={() => this.handleShowHospital(row._id)}>View</Button>
         }
     ]
 

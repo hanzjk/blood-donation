@@ -48,7 +48,17 @@ export default class Header extends Component {
                             <li className="nav-item">
                                 <a className="nav-link" aria-current="page" href="/nurse/home">
                                     <i className="fa fa-home" aria-hidden="true"></i> Home
-                </a>
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" aria-current="page" href="/nurse/donations">
+                                    <i class="fa fa-heart" aria-hidden="true"></i> Donations
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" aria-current="page" href="/nurse/receivers">
+                                <i class="fa fa-get-pocket" aria-hidden="true"></i> Receivers
+                                </a>
                             </li>
                             <li className="nav-item">
                                 <a

@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import DataTable from "react-data-table-component"
+import axios from 'axios'
 import Header from './Header';
 import { Button, Modal } from 'react-bootstrap';
-import HeaderPrimary from './HeaderPrimary';
+// import HeaderPrimary from './HeaderPrimary';
 
-
-export default class Get extends Component {
+export default class GetBloodReceivers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            admins: [],
-            admin: {}
+            mediInfo: [],
+            show: false,
+            showDetails: false,
+            patient: {}
         }
     }
 
     componentDidMount() {
-        this.getAdmins();
+        this.getInfo();
     }
 
     handleClose = () => this.setState({
@@ -24,24 +25,23 @@ export default class Get extends Component {
         showDetails: false
     });
 
-    handleShowAdmin = (id) => axios.get(`http://localhost:8000/admin/${id}`).then((res) => {
+    handleShowPatient = (id) => axios.get(`http://localhost:8000/patient/${id}`).then((res) => {
         if (res.data.success) {
             this.setState({
                 showDetails: true,
-                admin: res.data.admin
+                patient: res.data.patient
             });
 
-            console.log(this.state.admin);
+            console.log(this.state.patient);
         }
     })
 
-    getAdmins() {
-        axios.get("http://localhost:8000/admins").then(res => {
+    getInfo() {
+        axios.get("http://localhost:8000/mediInfoPatients").then(res => {
             if (res.data.success) {
                 this.setState({
-                    admins: res.data.existingAdmins
+                    mediInfo: res.data.existingInfo
                 });
-                console.log(this.state.admins);
             }
         })
     }
@@ -53,37 +53,65 @@ export default class Get extends Component {
     toPages(pages) {
         const results = [];
 
-        for (let i = 1; i < pages; i++) {
+        for (let i = 1; i <= pages; i++) {
             results.push(i);
         }
 
         return results;
     }
 
+    BloodType = (bType) => {
+        if (bType === "O+" || bType === "O-")
+            return (<Button disabled="true" style={{ color: "white", borderRadius: "20px" }} size="sm" variant="warning">{bType}</Button>)
+
+        else if (bType === "AB+" || bType === "AB-")
+            return (<Button disabled="true" style={{ color: "white", borderRadius: "20px" }} size="sm" variant="danger">{bType}</Button>)
+
+        else if (bType === "A+" || bType === "A-")
+            return (<Button disabled="true" style={{ color: "white", borderRadius: "20px" }} size="sm" variant="success">{bType}</Button>)
+
+        else if (bType === "B+" || bType === "B-")
+            return (<Button disabled="true" style={{ color: "white", borderRadius: "20px" }} size="sm" variant="secondary">{bType}</Button>)
+    }
+
     columns = [
         {
-            name: "Profile Photo",
-            selector: (row) => <img src={`/uploads/admin/${row.img}`} alt={`../uploads/admin/${row.img}`} style={{ width: "50px" }}></img>
-
+            name: "Receiver",
+            selector: (row) => <Button style={{ backgroundColor: "#002D62", color: "white", borderRadius: "20px" }} size="sm" onClick={() => this.handleShowPatient(row.patientId)}>View</Button>
         },
         {
-            name: "Name",
-            selector: (row) => row.name,
+            name: "Received Date",
+            selector: (row) => row.date,
             sortable: true
         },
         {
-            name: "Admin ID",
-            selector: (row) => row.adminId,
+            name: "Blood Type",
+            selector: (row) => this.BloodType(row.bloodType),
             sortable: true
         },
         {
-            name: "Email Address",
-            selector: (row) => row.email,
+            name: "Content",
+            selector: (row) => row.content,
             sortable: true
         },
         {
-            name: "View",
-            selector: (row) => <Button style={{borderRadius: "20px"}} variant="primary" size="sm" onClick={() => this.handleShowAdmin(row._id)}>View</Button>
+            name: "Temperature(C)",
+            selector: (row) => row.temperature,
+            sortable: true
+        },
+        {
+            name: "Pulse(per min)",
+            selector: (row) => row.pulse
+        },
+        {
+            name: "Pressure (mmHg)",
+            selector: (row) => row.bloodPressure,
+            sortable: true
+        },
+        {
+            name: "Weight(kg)",
+            selector: (row) => row.weight,
+            sortable: true
         }
     ]
 
@@ -111,8 +139,10 @@ export default class Get extends Component {
         const nextDisabled = currentPage === pageItems.length;
         const previosDisabled = currentPage === 1;
 
+
         return (
             <nav>
+                <br></br>
                 <ul className="pagination">
                     <li className="page-item">
                         <button
@@ -158,25 +188,26 @@ export default class Get extends Component {
     };
 
 
-    filterData(admins, searchKey) {
-        const result = admins.filter((admin) =>
-            admin.name.toLowerCase().includes(searchKey) || admin.name.toUpperCase().includes(searchKey)
+    filterData(mediInfo, searchKey) {
+        const result = mediInfo.filter((info) =>
+            info.date.toLowerCase().includes(searchKey) || info.date.toUpperCase().includes(searchKey) ||
+            info.bloodType.toLowerCase().includes(searchKey) || info.bloodType.toUpperCase().includes(searchKey)
         )
         this.setState({
-            admins: result
+            mediInfo: result
         })
     }
 
     handleSearchArea = (e) => {
         const searchKey = e.currentTarget.value;
-        axios.get("http://localhost:8000/admins").then(res => {
+        axios.get("http://localhost:8000/mediInfoPatients").then(res => {
             if (res.data.success) {
-                this.filterData(res.data.existingAdmins, searchKey)
+                this.filterData(res.data.existingInfo, searchKey)
             }
         })
     }
 
-    SearchAdmins = <div className="col-lg-3 mt-2 mb-2">
+    SearchInfo = <div className="col-lg-3 mt-2 mb-2">
         <input className="form-control" type="search" placeholder="Search" onChange={this.handleSearchArea}></input>
     </div>
 
@@ -184,21 +215,20 @@ export default class Get extends Component {
     render() {
         return (
             <div>
-                <HeaderPrimary/>
+                {/* <HeaderPrimary/> */}
                 <Header />
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-9 mt-2 mb-2">
-                            <h4>All Admins</h4>
+                            <h4>All Donations to Receivers</h4>
                         </div>
                     </div>
                     <DataTable
-                        title="Search admins with thier name"
                         responsive
                         subHeader
                         columns={this.columns}
-                        data={this.state.admins}
-                        subHeaderComponent={this.SearchAdmins}
+                        data={this.state.mediInfo}
+                        subHeaderComponent={this.SearchInfo}
                         striped={true}
                         highlightOnHover={true}
                         pagination
@@ -207,27 +237,36 @@ export default class Get extends Component {
                     />
                 </div>
                 <Modal show={this.state.showDetails} onHide={this.handleClose}>
-                    <Modal.Header closeButton style={{ backgroundColor: "#002D62", color: "white" }}>
-                        <Modal.Title>Admin Details</Modal.Title>
+                    <Modal.Header style={{ backgroundColor: "#002D62", color: "white" }}>
+                        <Modal.Title>Receiver Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="card" style={{ margin: "20px", border: "none" }}>
                                     <div className="card-body">
-                                        <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.admin.name}</h5>
+                                        <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.patient.name}</h5>
                                         <br></br>
-                                        <div className="d-flex flex-column align-items-center text-center">
-                                            <img src={`../../uploads/admin/${this.state.admin.img}`} alt="photo" style={{ width: "25%", height: "25%", marginLeft: "auto", marginRight: "auto" }}></img>
-                                        </div>
                                     </div>
                                     <dl className="d-flex align-items-center">
                                         <dl className="row">
-                                            <dt className="col-lg-5">admin ID</dt>
-                                            <dd className="col-lg-7">{this.state.admin.adminId}</dd>
+                                            <dt className="col-lg-5">Address</dt>
+                                            <dd className="col-lg-7">{this.state.patient.address}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Gender</dt>
+                                            <dd className="col-lg-7">{this.state.patient.gender}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Age</dt>
+                                            <dd className="col-lg-7">{this.state.patient.age}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Blood Group</dt>
+                                            <dd className="col-lg-7">{this.state.patient.bloodType}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Contact Number</dt>
+                                            <dd className="col-lg-7">{this.state.patient.contact}</dd>
                                             <hr></hr>
                                             <dt className="col-lg-5">Email</dt>
-                                            <dd className="col-lg-7">{this.state.admin.email}</dd>
+                                            <dd className="col-lg-7">{this.state.patient.email}</dd>
                                         </dl>
                                     </dl>
                                 </div>
