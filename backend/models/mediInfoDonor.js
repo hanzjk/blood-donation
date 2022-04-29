@@ -13,6 +13,10 @@ const mediInfoDonorSchema = mongoose.Schema({
         type:String,
         required:true
     },
+    content:{
+        type:Number,
+        required:true
+    },
     temperature:{
         type:Number,
         required:true

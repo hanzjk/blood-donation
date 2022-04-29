@@ -11,7 +11,8 @@ export default class Edit extends Component {
             nic: "",
             bloodType: "",
             contact: "",
-            email: ""
+            email: "",
+            err: ""
         }
     }
 
@@ -30,7 +31,6 @@ export default class Edit extends Component {
                     email: res.data.donor.email
                 });
 
-                console.log(this.state.donor);
             }
         })
     }
@@ -72,9 +72,16 @@ export default class Edit extends Component {
                     nic: "",
                     bloodType: "",
                     contact: "",
-                    email: ""
+                    email: "",
+                    err: ""
                 })
-                window.location.replace("/");
+
+                window.location.replace("http://localhost:3000/donor/home");
+            }
+            else {
+                this.setState({
+                    err: "Something went wrong. Please try again later."
+                })
             }
         })
     }
@@ -128,7 +135,6 @@ export default class Edit extends Component {
                                     <option value="AB+">AB+</option>
                                     <option value="AB-">AB-</option>
                                 </select>
-                                {/* <input type="text" className="form-control" name="bloodType" placeholder="Enter blood type" value={this.state.bloodType} onChange={this.handleInputChange}></input> */}
                             </div>
                         </div>
                         <div className="col md-4">
@@ -145,11 +151,11 @@ export default class Edit extends Component {
                             </div>
                         </div>
                     </div>
+                    {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
 
                     <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
-                        <i className="fa fa-check-square"></i>
-                        &nbsp; Update
-                        </button>
+                        Update <i className="fa fa-check-square"></i>
+                    </button>
                 </form>
             </div>
         )

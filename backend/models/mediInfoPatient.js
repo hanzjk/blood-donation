@@ -8,6 +8,14 @@ const mediInfoPatientSchema = mongoose.Schema({
         type:String,
         required:true
     },
+    bloodType:{
+        type:String,
+        required:true
+    },
+    content:{
+        type:Number,
+        required:true
+    },
     temperature:{
         type:Number,
         required:true

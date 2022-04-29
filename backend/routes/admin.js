@@ -98,14 +98,14 @@ router.put('/admin/password/update/:id', (req, res) => {
 });
 
 //update profile photo
-router.put('/admins/update/:id', upload.single('img'), (req, res) => {
+router.put('/admin/photo/update/:id', upload.single('img'), (req, res) => {
     req.body.img = req.file.originalname;
     Admin.findByIdAndUpdate(
         req.params.id,
         {
             $set: req.body
         },
-        (err, admin) => {
+        (err) => {
             if (err) {
                 return res.status(400).json({
                     error: err
@@ -113,7 +113,7 @@ router.put('/admins/update/:id', upload.single('img'), (req, res) => {
             }
 
             return res.status(200).json({
-                success: "Profile photo updated successfully", admin
+                success: "Profile photo updated successfully",
             });
         }
     );
@@ -151,21 +151,6 @@ router.get('/admin/:id', (req, res) => {
     })
 })
 
-//get specific admin dashboard
-router.get('/admin/dashboard/:id', (req, res) => {
-    let postId = req.params.id;
-    Admin.findById(postId).exec((err, admin) => {
-        if (err) {
-            return res.status(400).json({
-                success: false, err
-            });
-        }
-
-        return res.status(200).json({
-            success: true, admin
-        })
-    })
-});
 
 //get specific admin header
 router.get('/admin/home/:id', (req, res) => {
@@ -182,6 +167,20 @@ router.get('/admin/home/:id', (req, res) => {
         })
     })
 });
+
+//get admins count
+router.get('/admins/count', (req, res) => {
+    Admin.find().exec((err, results) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+        return res.status(200).json({
+            count: results.length
+        });
+    })
+})
 
 //login
 router.post('/admin/login', (req, res) => {

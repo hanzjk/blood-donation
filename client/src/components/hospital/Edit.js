@@ -9,7 +9,8 @@ export default class Edit extends Component {
             address: "",
             contact: "",
             email: "",
-            password: ""
+            password: "",
+            err: ""
         }
     }
 
@@ -64,9 +65,16 @@ export default class Edit extends Component {
                     address: "",
                     contact: "",
                     email: "",
-                    password: ""
+                    password: "",
+                    err:""
                 })
-                window.location.replace("/");
+                window.location.replace("http://localhost:3000/hospital/home");
+            }
+
+            else if (res.data.error) {
+                this.setState({
+                    error: "Something went wrong. Please try agin later."
+                })
             }
         })
     }
@@ -107,6 +115,7 @@ export default class Edit extends Component {
                             </div>
                         </div>
                     </div>
+                    {this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null}
 
                     <button className="btn btn-success" type="submit" style={{ marginTop: '15px' }} onClick={this.onSubmit}>
                         <i className="fa fa-check-square"></i>

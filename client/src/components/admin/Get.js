@@ -1,19 +1,39 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import DataTable from "react-data-table-component"
-import Navbar from './Navbar';
+import Header from './Header';
+import { Button, Modal } from 'react-bootstrap';
+import HeaderPrimary from './HeaderPrimary';
+
 
 export default class Get extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            admins: []
+            admins: [],
+            admin: {}
         }
     }
 
     componentDidMount() {
         this.getAdmins();
     }
+
+    handleClose = () => this.setState({
+        show: false,
+        showDetails: false
+    });
+
+    handleShowAdmin = (id) => axios.get(`http://localhost:8000/admin/${id}`).then((res) => {
+        if (res.data.success) {
+            this.setState({
+                showDetails: true,
+                admin: res.data.admin
+            });
+
+            console.log(this.state.admin);
+        }
+    })
 
     getAdmins() {
         axios.get("http://localhost:8000/admins").then(res => {
@@ -60,6 +80,10 @@ export default class Get extends Component {
             name: "Email Address",
             selector: (row) => row.email,
             sortable: true
+        },
+        {
+            name: "View",
+            selector: (row) => <Button style={{borderRadius: "20px"}} variant="primary" size="sm" onClick={() => this.handleShowAdmin(row._id)}>View</Button>
         }
     ]
 
@@ -160,7 +184,8 @@ export default class Get extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                <HeaderPrimary/>
+                <Header />
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-9 mt-2 mb-2">
@@ -168,7 +193,7 @@ export default class Get extends Component {
                         </div>
                     </div>
                     <DataTable
-                        title="Search admins with thier name or blood type"
+                        title="Search admins with thier name"
                         responsive
                         subHeader
                         columns={this.columns}
@@ -181,6 +206,40 @@ export default class Get extends Component {
                         defaultSortFieldID={1}
                     />
                 </div>
+                <Modal show={this.state.showDetails} onHide={this.handleClose}>
+                    <Modal.Header closeButton style={{ backgroundColor: "#002D62", color: "white" }}>
+                        <Modal.Title>Admin Details</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="card" style={{ margin: "20px", border: "none" }}>
+                                    <div className="card-body">
+                                        <h5 className="card-title" style={{ textAlign: "center", textTransform: "uppercase" }}>{this.state.admin.name}</h5>
+                                        <br></br>
+                                        <div className="d-flex flex-column align-items-center text-center">
+                                            <img src={`../../uploads/admin/${this.state.admin.img}`} alt="photo" style={{ width: "25%", height: "25%", marginLeft: "auto", marginRight: "auto" }}></img>
+                                        </div>
+                                    </div>
+                                    <dl className="d-flex align-items-center">
+                                        <dl className="row">
+                                            <dt className="col-lg-5">admin ID</dt>
+                                            <dd className="col-lg-7">{this.state.admin.adminId}</dd>
+                                            <hr></hr>
+                                            <dt className="col-lg-5">Email</dt>
+                                            <dd className="col-lg-7">{this.state.admin.email}</dd>
+                                        </dl>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         )
     }

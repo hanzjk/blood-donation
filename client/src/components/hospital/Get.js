@@ -32,7 +32,7 @@ export default class Get extends Component {
     toPages(pages) {
         const results = [];
 
-        for (let i = 1; i < pages; i++) {
+        for (let i = 1; i <= pages; i++) {
             results.push(i);
         }
 
